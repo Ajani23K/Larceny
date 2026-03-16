@@ -7,13 +7,15 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Player;
+
 public class GamePanel extends JPanel implements Runnable{
 
 	//Visual Settings
 	final int OGtileSize = 16; //16*16 original tile size
 	final int scale = 3; //how much original tile size will be scaled up
 	
-	final int tileSize = OGtileSize * scale; //48*48 is the final tile size 
+	public final int tileSize = OGtileSize * scale; //48*48 is the final tile size 
 	//declaring screen size
 	final int MaxScreenCol = 20;
 	final int MaxScreenRow = 16;
@@ -26,6 +28,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	KeyHandler keyH = new KeyHandler(); //adding keyhandler so we can move character
 	Thread GameThread; //this will allow us to run mechanics indefinitely, such as creating 60 frames per second
+	Player player = new Player(this,keyH);
 	
 	//set player default location
 	int playerX = 100;
@@ -90,29 +93,15 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 	public void update() {
 		//changing position of character based on user input
-		if(keyH.upPressed == true) {
-			playerY -= playerSpeed;
+		player.update();
 		}
-		if(keyH.leftPressed == true) {
-			playerX -= playerSpeed;
-		}
-		if(keyH.downPressed == true) {
-			playerY += playerSpeed;
-		}
-		if(keyH.rightPressed == true) {
-			playerX += playerSpeed;
-		}
-	}
+	
 	public void paintComponent(Graphics g) {
 		
 		super.paintComponent(g);
 		
 		Graphics2D g2 = (Graphics2D)g;
-		
-		g2.setColor(Color.white);
-		
-		g2.fillRect(playerX, playerY, tileSize, tileSize); //declaring location of the color rectangle
-		
+		player.draw(g2);
 		g2.dispose(); //good practice to save memory
 	}
 	
