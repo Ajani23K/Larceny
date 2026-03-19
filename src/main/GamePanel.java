@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler(); //adding keyhandler so we can move character
 	Thread GameThread; //this will allow us to run mechanics indefinitely, such as creating 60 frames per second
+	public CollisionChecker cChecker = new CollisionChecker(this);
 	public Player player = new Player(this,keyH);
 	
 

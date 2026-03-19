@@ -26,7 +26,7 @@ public class Player extends Entity{
 		screenX = gp.ScreenWidth/2 - (gp.tileSize/2);
 		screenY = gp.ScreenHeight/2 - (gp.tileSize/2);
 		
-		solidArea = new Rectangle(8,16,32,32); //collision area
+		solidArea = new Rectangle(8,16,28,28); //collision area x,y,width, height
 	
 		setDefaultValues();
 		getPlayerImage();
@@ -72,45 +72,7 @@ public class Player extends Entity{
 	}
 	public void update() {
 		//check if up is pressed to move player sprite
-	if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true ||  keyH.leftPressed == true) {
-		if(keyH.upPressed == true) {
-			direction = "up";
-			worldY -= speed;
-			
-		}
-		else if(keyH.downPressed == true) {
-			direction = "down";
-			worldY += speed;
-			
-		}
-		else if(keyH.leftPressed == true) {
-			direction = "left";
-			worldX -= speed;
-			
-		}
-		else if(keyH.rightPressed == true) {
-			direction = "right";
-			worldX += speed;
-		}
-	
-	spriteCounter++;
-	//player image changes every 3 frames
-	if(spriteCounter > 3) {
-		if(spriteNum == 1) {
-			spriteNum = 2;
-		}else if(spriteNum == 2) {
-			spriteNum = 3;
-		}else if(spriteNum == 3) {
-			spriteNum = 4;
-		}else if(spriteNum == 4) {
-			spriteNum = 5;
-		}else if(spriteNum == 5) {
-			spriteNum = 1;
-		}
-		spriteCounter = 0;
-	}
-	}
-	
+		playerMovement();
 	
 		//collisionOn = false;
 		//gp.colChecker.checkTile(this);
@@ -194,6 +156,67 @@ public class Player extends Entity{
 			break;
 		}
 		g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+		
+	}
+	public void playerMovement() {
+		if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true ||  keyH.leftPressed == true) {
+			if(keyH.upPressed == true) {
+				direction = "up";
+			
+				
+			}
+			else if(keyH.downPressed == true) {
+				direction = "down";
+			
+				
+			}
+			else if(keyH.leftPressed == true) {
+				direction = "left";
+			
+				
+			}
+			else if(keyH.rightPressed == true) {
+				direction = "right";
+			
+			}
+		collisionOn = false;
+		gp.cChecker.checkTile(this); //pass player class as an entity to check for collision
+		
+		//if collision is false, player can move 
+		if(collisionOn == false) {
+			
+			switch(direction) {	
+			case "up":
+				worldY -= speed;
+				break;
+			case "down":
+				worldY += speed;
+				break;
+			case "left":
+				worldX -= speed;
+				break;
+			case "right":
+				worldX += speed;
+				break;
+			}
+		}
+		spriteCounter++;
+		//player image changes every 3 frames
+		if(spriteCounter > 3) {
+			if(spriteNum == 1) {
+				spriteNum = 2;
+			}else if(spriteNum == 2) {
+				spriteNum = 3;
+			}else if(spriteNum == 3) {
+				spriteNum = 4;
+			}else if(spriteNum == 4) {
+				spriteNum = 5;
+			}else if(spriteNum == 5) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+		}
+		}
 		
 	}
 }
