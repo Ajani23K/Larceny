@@ -14,6 +14,7 @@ public class Entity {
 							right1, right2, right3, right4, right5;
 	public String direction;
 	public Rectangle solidArea;
+	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
 	
 	public int spriteCounter = 0;

@@ -18,6 +18,8 @@ public class Player extends Entity{
 	
 	public final int screenX;
 	public final int screenY;
+	int hasMoney = 0;
+	int hasSoda = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -27,6 +29,9 @@ public class Player extends Entity{
 		screenY = gp.ScreenHeight/2 - (gp.tileSize/2);
 		
 		solidArea = new Rectangle(8,16,28,28); //collision area x,y,width, height
+		
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y; //record default values because they will change later
 	
 		setDefaultValues();
 		getPlayerImage();
@@ -182,6 +187,11 @@ public class Player extends Entity{
 		collisionOn = false;
 		gp.cChecker.checkTile(this); //pass player class as an entity to check for collision
 		
+		//check Object collision
+		int objIndex = gp.cChecker.checkObject(this, true);
+		pickUpObject(objIndex);
+		
+		
 		//if collision is false, player can move 
 		if(collisionOn == false) {
 			
@@ -218,5 +228,29 @@ public class Player extends Entity{
 		}
 		}
 		
+	}
+	public void pickUpObject(int i) {
+		
+		if(i != 999) {
+			
+			String objectName = gp.obj[i].name;
+			
+			switch(objectName) {
+			case "Dollar":
+				hasMoney++;
+				gp.obj[i] = null;
+				System.out.println("Money: " +hasMoney);	
+				break;
+			case "Door":
+				break;
+			case "Trashcan":
+				break;
+			case "Soda":
+				hasSoda++;
+				gp.obj[i] = null;
+				System.out.println("Soda: " +hasSoda);
+				break;
+			}
+		}	
 	}
 }
