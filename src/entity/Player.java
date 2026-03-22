@@ -18,8 +18,7 @@ public class Player extends Entity{
 	
 	public final int screenX;
 	public final int screenY;
-	int hasMoney = 0;
-	int hasSoda = 0;
+	public int hasMoney = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH) {
 		this.gp = gp;
@@ -239,16 +238,16 @@ public class Player extends Entity{
 			case "Dollar":
 				hasMoney++;
 				gp.obj[i] = null;
-				System.out.println("Money: " +hasMoney);	
+				gp.ui.showMessage("You Gained Money!");
 				break;
 			case "Door":
 				break;
 			case "Trashcan":
 				break;
 			case "Soda":
-				hasSoda++;
+				speed+=2;
+				gp.ui.showMessage("You Feel Hastened!");
 				gp.obj[i] = null;
-				System.out.println("Soda: " +hasSoda);
 				break;
 			}
 		}	
