@@ -9,19 +9,22 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import map.SuperMap;
 
 public class TileManager {
 
 	GamePanel gp;
 	public Tile[] tile;
 	public int mapTileNum[][];
-	public TileManager(GamePanel gp) {
+	SuperMap map;
+	public TileManager(GamePanel gp, SuperMap map) {
 		
 		this.gp = gp;
 		tile = new Tile[10];
 		mapTileNum = new int [gp.MaxWorldCol][gp.MaxWorldRow];
 		getTileImage();
-		loadMap("/maps/LarcenyWorldMap.txt");
+		this.map = map;
+		loadMap(map.FilePath);
 		
 		
 		
@@ -60,13 +63,13 @@ public class TileManager {
 	
 	public void loadMap(String FilePath) {
 		try {
-			System.out.println("reading tile map");
+			System.out.println("reading tile map, "+FilePath);
 			InputStream is = getClass().getResourceAsStream(FilePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			int col = 0;
 			int row = 0;
-			 
+			System.out.println(gp.MaxWorldCol+" "+gp.MaxWorldRow);
 			while(col < gp.MaxWorldCol && row < gp.MaxWorldRow) {
 				
 				String line = br.readLine();
@@ -127,6 +130,14 @@ public class TileManager {
 				worldRow++;
 			}
 		}
+	}
+	public void changeMap(SuperMap map) {
+		
+		gp.mapnum = map.mapNumber;
+		gp.MaxWorldCol = map.worldCol;
+		gp.MaxWorldRow = map.worldRow;
+		loadMap(map.FilePath);
+		
 	}
 }
 

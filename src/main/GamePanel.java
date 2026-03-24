@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import map.SuperMap;
 import object.SuperObject;
 import tile.TileManager;
 
@@ -25,26 +26,55 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int ScreenWidth = tileSize * MaxScreenCol; //960 pixels
 	public final int ScreenHeight = tileSize * MaxScreenRow; //768 pixels
 	
-	//WORLD SETTINGS
-	public final int MaxWorldCol = 50;
-	public final int MaxWorldRow = 50;
-	public final int WorldWidth = tileSize * MaxWorldCol;
-	public final int WorldHeight = tileSize * MaxWorldRow;
+	
 	//FPS = frames per second
 	int FPS = 60;
 	
-	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler(); //adding keyhandler so we can move character
+	public int mapnum = 0;
+	
+	public SuperMap map[] = new SuperMap[10];
+	TileManager tileM;
+	KeyHandler keyH; //adding keyhandler so we can move character
 	Thread GameThread; //this will allow us to run mechanics indefinitely, such as creating 60 frames per second
-	public CollisionChecker cChecker = new CollisionChecker(this);
-	public AssetSetter aSetter = new AssetSetter(this);
-	public Player player = new Player(this,keyH);
+	public CollisionChecker cChecker;
+	public AssetSetter aSetter;
+	public Player player;
 	public SuperObject obj[] = new SuperObject[10];
-	public UI ui = new UI(this);
+	public UI ui;
+	
+	
+	
+	
+	//WORLD SETTINGS
+	public int MaxWorldCol;
+	public int MaxWorldRow;
+	public int WorldWidth;
+	public int WorldHeight;
 	
 
 	//constructor to set panel size
 	public GamePanel() {
+		aSetter = new AssetSetter(this);
+		aSetter.setMap();
+		
+		//WORLD SETTINGS
+		MaxWorldCol = map[mapnum].worldCol;
+		MaxWorldRow = map[mapnum].worldRow;
+		System.out.println(MaxWorldCol + " " + MaxWorldRow);
+		WorldWidth = tileSize * MaxWorldCol;
+		WorldHeight = tileSize * MaxWorldRow;
+				
+		tileM = new TileManager(this, map[0]);
+		keyH = new KeyHandler(); //adding keyhandler so we can move character
+		cChecker = new CollisionChecker(this);
+		
+		player = new Player(this,keyH, tileM, map);
+		ui = new UI(this);
+		
+		
+		
+		
+		
 		
 		this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
 		this.setBackground(Color.black);
@@ -56,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		
 		aSetter.setObject();
+		
 		
 	}
 	
@@ -119,6 +150,7 @@ public class GamePanel extends JPanel implements Runnable{
 		//draw background before player, similar to layers
 		tileM.draw(g2);
 		
+		//draw objects
 		for(int i  = 0; i < obj.length; i++) {
 			if(obj[i] != null) {
 				obj[i].draw(g2, this);
@@ -132,6 +164,7 @@ public class GamePanel extends JPanel implements Runnable{
 		ui.draw(g2);
 		g2.dispose(); //good practice to save memory
 	}
+	
 	
 	
 }

@@ -10,20 +10,24 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import map.SuperMap;
+import tile.TileManager;
 
 public class Player extends Entity{
 	
 	GamePanel gp;
 	KeyHandler keyH;
-	
+	TileManager tileM;
+	SuperMap map[];
 	public final int screenX;
 	public final int screenY;
 	public int hasMoney = 0;
 	
-	public Player(GamePanel gp, KeyHandler keyH) {
+	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[]) {
 		this.gp = gp;
 		this.keyH = keyH;
-	
+		this.tileM = tileM;
+		this.map = map;
 		screenX = gp.ScreenWidth/2 - (gp.tileSize/2);
 		screenY = gp.ScreenHeight/2 - (gp.tileSize/2);
 		
@@ -241,6 +245,7 @@ public class Player extends Entity{
 				gp.ui.showMessage("You Gained Money!");
 				break;
 			case "Door":
+				tileM.changeMap(map[1]);
 				break;
 			case "Trashcan":
 				break;

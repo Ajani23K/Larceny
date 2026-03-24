@@ -1,5 +1,7 @@
 package main;
 
+import map.Map_BobsBodega;
+import map.Map_World;
 import object.OBJ_Dollar;
 import object.OBJ_Door;
 import object.OBJ_Soda;
@@ -38,5 +40,9 @@ public class AssetSetter {
 		gp.obj[5] = new OBJ_Trashcan();
 		gp.obj[5].worldX = 6 * gp.tileSize;
 		gp.obj[5].worldY = 8 * gp.tileSize;
+	}
+	public void setMap() {
+		gp.map[0] = new Map_World();
+		gp.map[1] = new Map_BobsBodega();
 	}
 }
