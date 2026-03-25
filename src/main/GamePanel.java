@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public UI ui;
 	
 	
-	
+	double time;
 	
 	//WORLD SETTINGS
 	public int MaxWorldCol;
@@ -70,7 +70,6 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		player = new Player(this,keyH, tileM, map);
 		ui = new UI(this);
-		
 		
 		
 		

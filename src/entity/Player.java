@@ -21,7 +21,10 @@ public class Player extends Entity{
 	SuperMap map[];
 	public final int screenX;
 	public final int screenY;
+	public boolean inStore = false;
 	public int hasMoney = 0;
+	public double cooldownTime = 1000000000;
+	public double startTime = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[]) {
 		this.gp = gp;
@@ -36,6 +39,8 @@ public class Player extends Entity{
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y; //record default values because they will change later
 	
+	
+		
 		setDefaultValues();
 		getPlayerImage();
 	}
@@ -245,7 +250,21 @@ public class Player extends Entity{
 				gp.ui.showMessage("You Gained Money!");
 				break;
 			case "Door":
-				tileM.changeMap(map[1]);
+			
+				if(inStore == false) {
+					if(System.nanoTime() - startTime >= cooldownTime) {
+						tileM.changeMap(map[1]);
+						inStore = true;
+						startTime = System.nanoTime();
+					}
+				}
+				else {	
+					if(System.nanoTime() - startTime >= cooldownTime) {
+					tileM.changeMap(map[0]);
+					inStore = false;
+					startTime = System.nanoTime();
+					}
+				}
 				break;
 			case "Trashcan":
 				break;
