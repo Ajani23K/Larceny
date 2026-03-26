@@ -1,6 +1,7 @@
 package tile;
 
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UtilityTool;
 import map.SuperMap;
 
 public class TileManager {
@@ -32,29 +34,30 @@ public class TileManager {
 	
 	public void getTileImage() {
 		
-		try {
-			//loading images for tile set
+
 			System.out.println("reading tile images");
-			tile[0] = new Tile();
-			tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/BuildingWIP.png"));
-			tile[0].collision = true;
 			
-			tile[1] = new Tile();
-			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/SideWalkWIP.png"));
+			setup(0, "BuildingWIP", true);
 			
-			tile[2] = new Tile();
-			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/tiles/StreetTileWIP.png"));
+			setup(1, "SideWalkWIP", false);
+	
+			setup(2, "StreetTileWIP", false);
 			
-			tile[3] = new Tile();
-			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/tiles/GrassTileWIP.png"));
+			setup(3, "GrassTileWIP", false);
 
-			tile[4] = new Tile();
-			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/tiles/SignTileWIP.png"));
-			tile[4].collision = true;
+			setup(4, "SignTileWIP", true);
 
-			tile[5] = new Tile();
-			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/CrossWalkWIP.png"));
+			setup(5, "CrossWalkWIP", false);
 
+	}
+	public void setup(int index, String imageName, boolean collision) {
+		UtilityTool utool = new UtilityTool();
+		
+		try {
+			tile[index] = new Tile();
+			tile[index].image = ImageIO.read(getClass().getResourceAsStream("/tiles/"+imageName+".png"));
+			tile[index].image = utool.scaleImage(tile[index].image, gp.tileSize, gp.tileSize);
+			tile[index].collision = collision;
 		}catch(IOException e) {
 			e.printStackTrace();
 			System.out.println("tile images read failed");
@@ -118,7 +121,7 @@ public class TileManager {
 			   worldY + gp.tileSize*2 > gp.player.worldY - gp.player.screenY && 
 			   worldY - gp.tileSize*2 < gp.player.worldY + gp.player.screenY) {
 				//paint tile in that position 
-				g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
 			}
 			
 			//increment world col

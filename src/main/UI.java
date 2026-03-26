@@ -18,7 +18,7 @@ public class UI {
 	public UI(GamePanel gp) {
 		this.gp = gp;
 		arial_40 = new Font("Arial", Font.PLAIN, 40);
-		OBJ_Dollar dollar = new OBJ_Dollar();
+		OBJ_Dollar dollar = new OBJ_Dollar(gp);
 		moneyImage = dollar.image;
 	}
 	public void showMessage(String text) {

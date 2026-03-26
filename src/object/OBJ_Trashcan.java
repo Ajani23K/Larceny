@@ -4,13 +4,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class OBJ_Trashcan extends SuperObject{
+import main.GamePanel;
 
-	public OBJ_Trashcan() {
+public class OBJ_Trashcan extends SuperObject{
+	
+	GamePanel gp;
+	public OBJ_Trashcan(GamePanel gp) {
 		
 		name = "Trashcan";
 		try {
 			image = ImageIO.read(getClass().getResourceAsStream("/objects/TrashcanObjectWIP.png"));
+			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}

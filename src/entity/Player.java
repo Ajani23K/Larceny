@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 import map.SuperMap;
 import tile.TileManager;
 
@@ -23,7 +24,7 @@ public class Player extends Entity{
 	public final int screenY;
 	public boolean inStore = false;
 	public int hasMoney = 0;
-	public double cooldownTime = 1000000000;
+	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[]) {
@@ -53,35 +54,47 @@ public class Player extends Entity{
 	}
 	public void getPlayerImage(){
 		
-		try {
+	
 			//down
-			down1 = ImageIO.read(getClass().getResource("/player/LarcyWalkDown1.png"));
-			down2 = ImageIO.read(getClass().getResource("/player/LarcyWalkDown2.png"));
-			down3 = ImageIO.read(getClass().getResource("/player/LarcyWalkDown3.png"));
-			down4 = ImageIO.read(getClass().getResource("/player/LarcyWalkDown4.png"));
-			down5 = ImageIO.read(getClass().getResource("/player/LarcyWalkDown5.png"));
+			down1 = setup("LarcyWalkDown1");
+			down2 = setup("LarcyWalkDown2");
+			down3 = setup("LarcyWalkDown3");
+			down4 = setup("LarcyWalkDown4");
+			down5 = setup("LarcyWalkDown5");
 			//left
-			left1 = ImageIO.read(getClass().getResource("/player/LarcyWalkLeft1.png"));
-			left2 = ImageIO.read(getClass().getResource("/player/LarcyWalkLeft2.png"));
-			left3 = ImageIO.read(getClass().getResource("/player/LarcyWalkLeft3.png"));
-			left4 = ImageIO.read(getClass().getResource("/player/LarcyWalkLeft4.png"));
-			left5 = ImageIO.read(getClass().getResource("/player/LarcyWalkLeft5.png"));
+			left1 = setup("LarcyWalkLeft1");
+			left2 = setup("LarcyWalkLeft2");
+			left3 = setup("LarcyWalkLeft3");
+			left4 = setup("LarcyWalkLeft4");
+			left5 = setup("LarcyWalkLeft5");
 			//right
-			right1 = ImageIO.read(getClass().getResource("/player/LarcyWalkRight1.png"));
-			right2 = ImageIO.read(getClass().getResource("/player/LarcyWalkRight2.png"));
-			right3 = ImageIO.read(getClass().getResource("/player/LarcyWalkRight3.png"));
-			right4 = ImageIO.read(getClass().getResource("/player/LarcyWalkRight4.png"));
-			right5 = ImageIO.read(getClass().getResource("/player/LarcyWalkRight5.png"));
+			right1 = setup("LarcyWalkRight1");
+			right2 = setup("LarcyWalkRight2");
+			right3 = setup("LarcyWalkRight3");
+			right4 = setup("LarcyWalkRight4");
+			right5 = setup("LarcyWalkRight5");
 			//up
-			up1 = ImageIO.read(getClass().getResource("/player/LarcyWalkUp1.png"));
-			up2 = ImageIO.read(getClass().getResource("/player/LarcyWalkUp2.png"));
-			up3 = ImageIO.read(getClass().getResource("/player/LarcyWalkUp3.png"));
-			up4 = ImageIO.read(getClass().getResource("/player/LarcyWalkUp4.png"));
-			up5 = ImageIO.read(getClass().getResource("/player/LarcyWalkUp5.png"));
+			up1 = setup("LarcyWalkUp1");
+			up2 = setup("LarcyWalkUp2");
+			up3 = setup("LarcyWalkUp3");
+			up4 = setup("LarcyWalkUp4");
+			up5 = setup("LarcyWalkUp5");
 			
+
+		
+	}
+	public BufferedImage setup(String imageName) {
+		//scaling up the images so it doesnt have to be done in draw method
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
+		try {
+			image = ImageIO.read(getClass().getResource("/player/"+imageName+".png"));
+			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		return image;
 	}
 	public void update() {
 		//check if up is pressed to move player sprite
@@ -168,7 +181,7 @@ public class Player extends Entity{
 			}
 			break;
 		}
-		g2.drawImage(image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+		g2.drawImage(image, screenX, screenY, null);
 		
 	}
 	public void playerMovement() {
