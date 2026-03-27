@@ -1,7 +1,6 @@
 package tile;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +47,10 @@ public class TileManager {
 			setup(4, "SignTileWIP", true);
 
 			setup(5, "CrossWalkWIP", false);
+			
+			setup(6, "WallWIP", true);
+			
+			setup(7, "FloorWIP", false);
 
 	}
 	public void setup(int index, String imageName, boolean collision) {
