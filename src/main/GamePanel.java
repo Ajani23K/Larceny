@@ -42,6 +42,11 @@ public class GamePanel extends JPanel implements Runnable{
 	public SuperObject obj[] = new SuperObject[10];
 	public UI ui;
 	
+	//Game state
+	
+	public int gameState;
+	public final int playState = 1;
+	public final int pauseState = 2;
 	
 	double time;
 	
@@ -64,8 +69,8 @@ public class GamePanel extends JPanel implements Runnable{
 		WorldWidth = tileSize * MaxWorldCol;
 		WorldHeight = tileSize * MaxWorldRow;
 				
-		tileM = new TileManager(this, map[0]);
-		keyH = new KeyHandler(); //adding keyhandler so we can move character
+		tileM = new TileManager(this, map[mapnum]);
+		keyH = new KeyHandler(this); //adding keyhandler so we can move character
 		cChecker = new CollisionChecker(this);
 		
 		player = new Player(this,keyH, tileM, map);
@@ -85,6 +90,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		
 		aSetter.setObject();
+		gameState = playState;
 		
 		
 	}
@@ -137,8 +143,13 @@ public class GamePanel extends JPanel implements Runnable{
 		
 	}
 	public void update() {
+		if(gameState == playState) {
 		//changing position of character based on user input
 		player.update();
+		}
+		if(gameState == pauseState) {
+			//player info is not updated when paused
+		}
 		}
 	
 	public void paintComponent(Graphics g) {

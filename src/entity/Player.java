@@ -23,7 +23,7 @@ public class Player extends Entity{
 	public final int screenX;
 	public final int screenY;
 	public boolean inStore = false;
-	public int hasMoney = 0;
+	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
 	
@@ -258,9 +258,7 @@ public class Player extends Entity{
 			
 			switch(objectName) {
 			case "Dollar":
-				hasMoney++;
-				gp.obj[i] = null;
-				gp.ui.showMessage("You Gained Money!");
+			
 				break;
 			case "Door":
 			
