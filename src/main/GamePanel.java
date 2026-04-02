@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import map.SuperMap;
 import object.SuperObject;
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Player player;
 	public SuperObject obj[] = new SuperObject[10];
 	public UI ui;
+	public Entity npc[] = new Entity[10];
 	
 	//Game state
 	
@@ -90,6 +92,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame() {
 		
 		aSetter.setObject();
+		aSetter.setNPC();
 		gameState = playState;
 		
 		
@@ -146,6 +149,12 @@ public class GamePanel extends JPanel implements Runnable{
 		if(gameState == playState) {
 		//changing position of character based on user input
 		player.update();
+		for(int i = 0; i < npc.length; i++) {
+			if(npc[i] != null) {
+				npc[i].update();
+			}
+		}
+	
 		}
 		if(gameState == pauseState) {
 			//player info is not updated when paused
@@ -173,7 +182,12 @@ public class GamePanel extends JPanel implements Runnable{
 				obj[i].draw(g2, this);
 			}
 		}
-		
+		//NPC
+		for(int i = 0; i < npc.length; i++) {
+			if(npc[i] != null) {
+				npc[i].draw(g2);
+			}
+		}
 		//draw player
 		player.draw(g2);
 		

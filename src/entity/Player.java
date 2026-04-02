@@ -16,7 +16,7 @@ import tile.TileManager;
 
 public class Player extends Entity{
 	
-	GamePanel gp;
+	
 	KeyHandler keyH;
 	TileManager tileM;
 	SuperMap map[];
@@ -28,7 +28,9 @@ public class Player extends Entity{
 	public double startTime = 0;
 	
 	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[]) {
-		this.gp = gp;
+		super(gp);
+		
+		
 		this.keyH = keyH;
 		this.tileM = tileM;
 		this.map = map;
@@ -56,45 +58,32 @@ public class Player extends Entity{
 		
 	
 			//down
-			down1 = setup("LarcyWalkDown1");
-			down2 = setup("LarcyWalkDown2");
-			down3 = setup("LarcyWalkDown3");
-			down4 = setup("LarcyWalkDown4");
-			down5 = setup("LarcyWalkDown5");
+			down1 = setup("/player/LarcyWalkDown1");
+			down2 = setup("/player/LarcyWalkDown2");
+			down3 = setup("/player/LarcyWalkDown3");
+			down4 = setup("/player/LarcyWalkDown4");
+			down5 = setup("/player/LarcyWalkDown5");
 			//left
-			left1 = setup("LarcyWalkLeft1");
-			left2 = setup("LarcyWalkLeft2");
-			left3 = setup("LarcyWalkLeft3");
-			left4 = setup("LarcyWalkLeft4");
-			left5 = setup("LarcyWalkLeft5");
+			left1 = setup("/player/LarcyWalkLeft1");
+			left2 = setup("/player/LarcyWalkLeft2");
+			left3 = setup("/player/LarcyWalkLeft3");
+			left4 = setup("/player/LarcyWalkLeft4");
+			left5 = setup("/player/LarcyWalkLeft5");
 			//right
-			right1 = setup("LarcyWalkRight1");
-			right2 = setup("LarcyWalkRight2");
-			right3 = setup("LarcyWalkRight3");
-			right4 = setup("LarcyWalkRight4");
-			right5 = setup("LarcyWalkRight5");
+			right1 = setup("/player/LarcyWalkRight1");
+			right2 = setup("/player/LarcyWalkRight2");
+			right3 = setup("/player/LarcyWalkRight3");
+			right4 = setup("/player/LarcyWalkRight4");
+			right5 = setup("/player/LarcyWalkRight5");
 			//up
-			up1 = setup("LarcyWalkUp1");
-			up2 = setup("LarcyWalkUp2");
-			up3 = setup("LarcyWalkUp3");
-			up4 = setup("LarcyWalkUp4");
-			up5 = setup("LarcyWalkUp5");
+			up1 = setup("/player/LarcyWalkUp1");
+			up2 = setup("/player/LarcyWalkUp2");
+			up3 = setup("/player/LarcyWalkUp3");
+			up4 = setup("/player/LarcyWalkUp4");
+			up5 = setup("/player/LarcyWalkUp5");
 			
 
 		
-	}
-	public BufferedImage setup(String imageName) {
-		//scaling up the images so it doesnt have to be done in draw method
-		UtilityTool uTool = new UtilityTool();
-		BufferedImage image = null;
-		
-		try {
-			image = ImageIO.read(getClass().getResource("/player/"+imageName+".png"));
-			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		return image;
 	}
 	public void update() {
 		//check if up is pressed to move player sprite
@@ -212,6 +201,9 @@ public class Player extends Entity{
 		int objIndex = gp.cChecker.checkObject(this, true);
 		pickUpObject(objIndex);
 		
+		//check NPC collision
+		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
+		interactNPC(npcIndex);
 		
 		//if collision is false, player can move 
 		if(collisionOn == false) {
@@ -286,5 +278,11 @@ public class Player extends Entity{
 				break;
 			}
 		}	
+	}
+	public void interactNPC(int i) {
+		
+		if(i != 999) {
+			System.out.println("Hitting npc");
+		}
 	}
 }

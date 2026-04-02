@@ -1,5 +1,6 @@
 package main;
 
+import entity.NPC_Bob;
 import map.Map_BobsBodega;
 import map.Map_World;
 import object.OBJ_Dollar;
@@ -44,5 +45,11 @@ public class AssetSetter {
 	public void setMap() {
 		gp.map[0] = new Map_World();
 		gp.map[1] = new Map_BobsBodega();
+	}
+	public void setNPC() {
+		
+		gp.npc[0] = new NPC_Bob(gp);
+		gp.npc[0].worldX = gp.tileSize*1;
+		gp.npc[0].worldY = gp.tileSize*6;
 	}
 }
