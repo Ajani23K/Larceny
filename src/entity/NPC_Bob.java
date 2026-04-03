@@ -12,6 +12,7 @@ public class NPC_Bob extends Entity{
 		speed = 1;
 		
 		getImage();
+		setDialogue();
 	}
 	public void getImage(){
 		
@@ -54,5 +55,11 @@ public class NPC_Bob extends Entity{
 		actionLockCounter = 0;
 		}
 		
+	}
+	public void setDialogue() {
+		dialogues[0] = "Welcome to Bob's Bodega, please come inside!";
+	}
+	public void speak() {
+		super.speak();
 	}
 }

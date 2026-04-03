@@ -282,7 +282,12 @@ public class Player extends Entity{
 	public void interactNPC(int i) {
 		
 		if(i != 999) {
-			System.out.println("Hitting npc");
+			if(keyH.ePressed == true) {
+			gp.gameState = gp.dialogueState;
+			gp.npc[i].speak();
 		}
+			keyH.ePressed = false;
+		}
+		
 	}
 }

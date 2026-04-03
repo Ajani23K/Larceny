@@ -20,7 +20,8 @@ public class KeyHandler implements KeyListener{
 
 
 		int code = e.getKeyCode(); //returns the number of the key that was pressed
-		
+		//playState
+		if(gp.gameState == gp.playState) {
 		if(code == KeyEvent.VK_W) {
 			upPressed = true;
 		}
@@ -37,8 +38,6 @@ public class KeyHandler implements KeyListener{
 		}if(code == KeyEvent.VK_ESCAPE) {
 			if(gp.gameState == gp.playState) {
 				gp.gameState = gp.pauseState;
-			}else if(gp.gameState == gp.pauseState) {
-				gp.gameState = gp.playState;
 			}
 		}
 		
@@ -52,8 +51,20 @@ public class KeyHandler implements KeyListener{
 			}
 		}
 		
-
+		}
+		//pauseState
+		else if(gp.gameState == gp.pauseState) {
+			if(gp.gameState == gp.pauseState) {
+				gp.gameState = gp.playState;
+			}
+		}
 		
+		//dialogueState
+		else if(gp.gameState == gp.dialogueState) {
+			if(code == KeyEvent.VK_SPACE) {
+				gp.gameState = gp.playState;
+			}
+		}
 	}
 
 	@Override

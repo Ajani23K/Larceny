@@ -51,6 +51,8 @@ public class TileManager {
 			setup(6, "WallWIP", true);
 			
 			setup(7, "FloorWIP", false);
+			
+			setup(8, "BarrierTile", true);
 
 	}
 	public void setup(int index, String imageName, boolean collision) {
