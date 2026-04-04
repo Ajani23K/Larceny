@@ -20,36 +20,68 @@ public class KeyHandler implements KeyListener{
 
 
 		int code = e.getKeyCode(); //returns the number of the key that was pressed
+		//titleState
+		if(gp.gameState == gp.titleState) {
+			
+			if(code == KeyEvent.VK_W) {
+				if(gp.ui.commandNum== 0) {
+					gp.ui.commandNum = 2;
+				}else {
+				gp.ui.commandNum--;
+				}
+			}
+			if(code == KeyEvent.VK_S) {
+				if(gp.ui.commandNum==2) {
+					gp.ui.commandNum = 0;
+				}else {
+				gp.ui.commandNum++;
+				}	
+			}
+			if(code == KeyEvent.VK_ENTER) {
+				if(gp.ui.commandNum == 0) {
+					gp.gameState = gp.playState;
+				}
+				if(gp.ui.commandNum == 1) {
+					//add later
+				}
+				if(gp.ui.commandNum == 2) {
+					System.exit(0);
+				}
+			}
+		}
+		
+		
 		//playState
 		if(gp.gameState == gp.playState) {
-		if(code == KeyEvent.VK_W) {
+			
+			if(code == KeyEvent.VK_W) {
 			upPressed = true;
-		}
-		if(code == KeyEvent.VK_A) {
+			}
+			if(code == KeyEvent.VK_A) {
 			leftPressed = true;
-		}
-		if(code == KeyEvent.VK_S) {
+			}
+			if(code == KeyEvent.VK_S) {
 			downPressed = true;
-		}
-		if(code == KeyEvent.VK_D) {
+			}
+			if(code == KeyEvent.VK_D) {
 			rightPressed = true;
-		}if(code == KeyEvent.VK_E) {
+			}if(code == KeyEvent.VK_E) {
 			ePressed = true;
-		}if(code == KeyEvent.VK_ESCAPE) {
+			}if(code == KeyEvent.VK_ESCAPE) {
 			if(gp.gameState == gp.playState) {
 				gp.gameState = gp.pauseState;
 			}
 		}
 		
 		//DEBUG
-		if(code == KeyEvent.VK_T) {
-			if(checkDrawTime == false) {
+			if(code == KeyEvent.VK_T) {
+				if(checkDrawTime == false) {
 				checkDrawTime = true;
-			}
-			else if(checkDrawTime == true) {
+				}
+				else if(checkDrawTime == true) {
 				checkDrawTime = false;
+				}
 			}
-		}
 		
 		}
 		//pauseState

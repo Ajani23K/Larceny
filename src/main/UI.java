@@ -17,6 +17,7 @@ public class UI {
 	public String message = "";
 	int messageCounter = 0;
 	public String currentDialogue;
+	public int commandNum = 0;
 	
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -33,6 +34,10 @@ public class UI {
 		this.g2 = g2;
 		g2.setFont(arial_40);
 		g2.setColor(Color.white);
+		//titlestate
+		if(gp.gameState == gp.titleState) {
+			drawTitleScreen();
+		}
 		//playstate
 		if(gp.gameState == gp.playState) {
 			//Do playState stuff later
@@ -56,6 +61,55 @@ public class UI {
 				messageCounter = 0;
 				messageOn = false;
 			}
+		}
+	}
+	public void drawTitleScreen() {
+		//background color
+		g2.setColor(new Color(124, 41, 42));
+		g2.fillRect(0, 0, gp.ScreenWidth, gp.ScreenHeight);
+		//Title Name
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+		String text = "Larceny";
+		int x = getXforCenteredText(text);
+		int y = gp.tileSize*3;
+		
+		//Shadow
+		g2.setColor(Color.black);
+		g2.drawString(text, x+5, y+5);
+		//Main Color
+		g2.setColor(Color.white);
+		g2.drawString(text, x, y);
+		
+		//Displaying Character Image
+		
+		x = gp.ScreenWidth/2 - (gp.tileSize)/2;
+		y += gp.tileSize*4;
+		g2.drawImage(gp.player.right1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+		
+		//Menu
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 48F));
+		text = "NEW GAME";
+		x = getXforCenteredText(text);
+		y += gp.tileSize*4;
+		g2.drawString(text, x, y);
+		if(commandNum ==0) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+		
+		text = "LOAD GAME";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNum == 1) {
+			g2.drawString(">", x-gp.tileSize, y);
+		}
+		
+		text = "QUIT";
+		x = getXforCenteredText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNum == 2) {
+			g2.drawString(">", x-gp.tileSize, y);
 		}
 	}
 	public void drawPausedScreen() {

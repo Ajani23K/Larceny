@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 	//Game state
 	
 	public int gameState;
+	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
@@ -94,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable{
 		
 		aSetter.setObject();
 		aSetter.setNPC();
-		gameState = playState;
+		gameState = titleState;
 		
 		
 	}
@@ -173,35 +174,42 @@ public class GamePanel extends JPanel implements Runnable{
 		if(keyH.checkDrawTime == true) {
 			drawstart = System.nanoTime();
 		}
-		
-		//draw background before player, similar to layers
-		tileM.draw(g2);
-		
-		//draw objects
-		for(int i  = 0; i < obj.length; i++) {
-			if(obj[i] != null) {
-				obj[i].draw(g2, this);
+		//title Screen
+		if(gameState == titleState) {
+			ui.draw(g2);
+		}
+		//Others
+		else {
+			//draw background before player, similar to layers
+			tileM.draw(g2);
+			
+			//draw objects
+			for(int i  = 0; i < obj.length; i++) {
+				if(obj[i] != null) {
+					obj[i].draw(g2, this);
+				}
+			}
+			//NPC
+			for(int i = 0; i < npc.length; i++) {
+				if(npc[i] != null) {
+					npc[i].draw(g2);
+				}
+			}
+			//draw player
+			player.draw(g2);
+			
+			//draw ui
+			ui.draw(g2);
+			//DEBUG 
+			if(keyH.checkDrawTime == true) {
+				long drawEnd = System.nanoTime();
+				long passed = drawEnd - drawstart;
+				g2.setColor(Color.white);
+				g2.drawString("Draw Time :"+ passed, 10, 400);
+				System.out.println("Draw Time :"+ passed);
 			}
 		}
-		//NPC
-		for(int i = 0; i < npc.length; i++) {
-			if(npc[i] != null) {
-				npc[i].draw(g2);
-			}
-		}
-		//draw player
-		player.draw(g2);
 		
-		//draw ui
-		ui.draw(g2);
-		//DEBUG 
-		if(keyH.checkDrawTime == true) {
-			long drawEnd = System.nanoTime();
-			long passed = drawEnd - drawstart;
-			g2.setColor(Color.white);
-			g2.drawString("Draw Time :"+ passed, 10, 400);
-			System.out.println("Draw Time :"+ passed);
-		}
 		
 		g2.dispose(); //good practice to save memory
 	}
