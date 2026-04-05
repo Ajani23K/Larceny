@@ -52,4 +52,10 @@ public class AssetSetter {
 		gp.npc[0].worldX = gp.tileSize*2;
 		gp.npc[0].worldY = gp.tileSize*7;
 	}
+	public void loadObjectMap() {
+		
+	}
+	public void readObjectMap() {
+		
+	}
 }
