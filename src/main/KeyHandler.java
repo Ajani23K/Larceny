@@ -77,9 +77,11 @@ public class KeyHandler implements KeyListener{
 			if(code == KeyEvent.VK_T) {
 				if(checkDrawTime == false) {
 				checkDrawTime = true;
+				gp.debugState = true;
 				}
 				else if(checkDrawTime == true) {
 				checkDrawTime = false;
+				gp.debugState = false;
 				}
 			}
 		

@@ -1,5 +1,7 @@
 package tile;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +11,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.UI;
 import main.UtilityTool;
 import map.SuperMap;
 
@@ -18,6 +21,7 @@ public class TileManager {
 	public Tile[] tile;
 	public int mapTileNum[][];
 	SuperMap map;
+	Font arial40 = new Font("Arial", Font.BOLD, 15);
 	public TileManager(GamePanel gp, SuperMap map) {
 		
 		this.gp = gp;
@@ -127,6 +131,17 @@ public class TileManager {
 			   worldY - gp.tileSize*2 < gp.player.worldY + gp.player.screenY) {
 				//paint tile in that position 
 				g2.drawImage(tile[tileNum].image, screenX, screenY, null);
+				if(gp.debugState == true) {
+					g2.setColor(Color.white);
+					
+					g2.setFont(arial40);
+					g2.drawRect(screenX,screenY,gp.tileSize,gp.tileSize);
+					String sworldCol =  Integer.toString(worldRow);
+					String sworldRow =  Integer.toString(worldCol);
+					String stileNum = "("+sworldCol+", "+sworldRow+")";
+					g2.setColor(Color.green);
+					g2.drawString(stileNum, screenX+gp.tileSize/4, screenY+gp.tileSize/2);
+				}
 			}
 			
 			//increment world col
@@ -147,5 +162,6 @@ public class TileManager {
 		loadMap(map.FilePath);
 		
 	}
+
 }
 

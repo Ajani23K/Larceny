@@ -11,7 +11,7 @@ import object.OBJ_Dollar;
 public class UI {
 	
 	GamePanel gp;
-	Font arial_40;
+	public Font arial_40;
 	Graphics2D g2;
 	public boolean messageOn = false;
 	public String message = "";
@@ -158,4 +158,5 @@ public class UI {
 		int x = gp.ScreenWidth/2 - length/2;
 		return x;
 	}
+	
 }
