@@ -8,6 +8,7 @@ public class KeyHandler implements KeyListener{
 	public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
+	public boolean showGridLocation = false;
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
 	}
@@ -74,15 +75,26 @@ public class KeyHandler implements KeyListener{
 		}
 		
 		//DEBUG
+			//check draw time
 			if(code == KeyEvent.VK_T) {
 				if(checkDrawTime == false) {
 				checkDrawTime = true;
-				gp.debugState = true;
 				}
 				else if(checkDrawTime == true) {
 				checkDrawTime = false;
-				gp.debugState = false;
+				
 				}
+			}
+			
+			if(code == KeyEvent.VK_Y) {
+				if(showGridLocation  == false) {
+					
+					showGridLocation = true;
+					}
+					else if(showGridLocation  == true) {
+						
+					showGridLocation = false;
+					}
 			}
 		
 		}

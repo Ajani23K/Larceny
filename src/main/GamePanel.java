@@ -43,6 +43,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public SuperObject obj[] = new SuperObject[10];
 	public UI ui;
 	public Entity npc[] = new Entity[10];
+	public EventHandler eventHandler;
 	
 	//Game state
 	
@@ -51,7 +52,6 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int dialogueState = 3;
-	public boolean debugState = false;
 	
 	double time;
 	
@@ -74,10 +74,11 @@ public class GamePanel extends JPanel implements Runnable{
 		WorldWidth = tileSize * MaxWorldCol;
 		WorldHeight = tileSize * MaxWorldRow;
 				
-		tileM = new TileManager(this, map[mapnum]);
-		keyH = new KeyHandler(this); //adding keyhandler so we can move character
-		cChecker = new CollisionChecker(this);
 		
+		keyH = new KeyHandler(this); //adding keyhandler so we can move character
+		tileM = new TileManager(this, map[mapnum], keyH);
+		cChecker = new CollisionChecker(this);
+		eventHandler = new EventHandler(this);
 		player = new Player(this,keyH, tileM, map);
 		ui = new UI(this);
 		

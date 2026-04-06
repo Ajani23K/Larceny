@@ -99,6 +99,10 @@ public class UI {
 			}
 			i++;
 			x+= gp.tileSize + 4;
+			if(x >= gp.ScreenWidth) {
+				y += gp.tileSize;
+				x = gp.tileSize/2;
+			}
 		}
 		
 		

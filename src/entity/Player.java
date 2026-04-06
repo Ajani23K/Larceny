@@ -37,7 +37,7 @@ public class Player extends Entity{
 		screenX = gp.ScreenWidth/2 - (gp.tileSize/2);
 		screenY = gp.ScreenHeight/2 - (gp.tileSize/2);
 		
-		solidArea = new Rectangle(8,16,28,28); //collision area x,y,width, height
+		solidArea = new Rectangle(8,16,32,32); //collision area x,y,width, height
 		
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y; //record default values because they will change later
@@ -211,6 +211,11 @@ public class Player extends Entity{
 		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 		interactNPC(npcIndex);
 		
+		//check event
+		gp.eventHandler.checkEvent();
+		
+		keyH.ePressed = false;
+		
 		//if collision is false, player can move 
 		if(collisionOn == false) {
 			
@@ -292,7 +297,6 @@ public class Player extends Entity{
 			gp.gameState = gp.dialogueState;
 			gp.npc[i].speak();
 		}
-			keyH.ePressed = false;
 		}
 		
 	}
