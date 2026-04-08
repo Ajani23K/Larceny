@@ -1,22 +1,28 @@
 package object;
 
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
+import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Trashcan extends SuperObject{
+public class OBJ_Trashcan extends Entity{
 	
-	GamePanel gp;
+
 	public OBJ_Trashcan(GamePanel gp) {
 		
+		super(gp);
 		name = "Trashcan";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/TrashcanObjectWIP.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+		down1 = setup("/objects/TrashcanObjectWIP");
+		
+		collision = true;
+		solidArea.x = 20;
+		solidArea.y = 20;
+		
+		solidArea.height = 28;
+		solidArea.width = 28;
+		
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
+		
+		
 	}
 }

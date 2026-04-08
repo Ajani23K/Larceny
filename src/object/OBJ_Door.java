@@ -4,20 +4,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Door extends SuperObject{
+public class OBJ_Door extends Entity{
 
-	GamePanel gp;
+
 	public OBJ_Door(GamePanel gp) {
 		
+		super(gp);
 		name = "Door";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/DoorObjectWIP.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+		down1 = setup("/objects/DoorObjectWIP");
+		
 		collision = true;
 	}
 }

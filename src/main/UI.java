@@ -7,7 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import object.OBJ_Heart;
 import object.OBJ_Dollar;
-import object.SuperObject;
+import entity.Entity;
+
 
 public class UI {
 	
@@ -26,7 +27,7 @@ public class UI {
 		arial_40 = new Font("Arial", Font.PLAIN, 40);
 		
 		//Create HUD object
-		SuperObject heart = new OBJ_Heart(gp);
+		Entity heart = new OBJ_Heart(gp);
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;

@@ -20,7 +20,7 @@ public class Entity {
 							down1, down2, down3, down4, down5, 
 							left1, left2, left3, left4, left5, 
 							right1, right2, right3, right4, right5;
-	public String direction;
+	public String direction = "down";
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
@@ -29,6 +29,10 @@ public class Entity {
 	public int spriteNum = 1;
 	
 	public int actionLockCounter = 0;
+	
+	public BufferedImage image, image2, image3;
+	public String name;
+	public boolean collision = false;
 	
 	String dialogues[] = new String[20];
 	

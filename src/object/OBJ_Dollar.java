@@ -4,19 +4,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import entity.Entity;
 import main.GamePanel;
 
-public class OBJ_Dollar extends SuperObject{
+public class OBJ_Dollar extends Entity{
 
-	GamePanel gp;
+	
 	public OBJ_Dollar(GamePanel gp) {
 		
+		super(gp);
 		name = "Dollar";
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/DollarObjectWIP.png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+		down1 = setup("/objects/DollarObjectWIP");
+		
 	}
 }

@@ -4,13 +4,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JPanel;
 
 import entity.Entity;
 import entity.Player;
 import map.SuperMap;
-import object.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -40,11 +42,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public CollisionChecker cChecker;
 	public AssetSetter aSetter;
 	public Player player;
-	public SuperObject obj[] = new SuperObject[10];
+	public Entity obj[] = new Entity[10];
 	public UI ui;
 	public Entity npc[] = new Entity[10];
 	public EventHandler eventHandler;
 	
+	ArrayList<Entity> entityList = new ArrayList<>();
 	//Game state
 	
 	public int gameState;
@@ -185,21 +188,40 @@ public class GamePanel extends JPanel implements Runnable{
 			//draw background before player, similar to layers
 			tileM.draw(g2);
 			
-			//draw objects
-			for(int i  = 0; i < obj.length; i++) {
-				if(obj[i] != null) {
-					obj[i].draw(g2, this);
-				}
-			}
-			//NPC
+			entityList.add(player);
+			
 			for(int i = 0; i < npc.length; i++) {
 				if(npc[i] != null) {
-					npc[i].draw(g2);
+					entityList.add(npc[i]);
 				}
-			}
-			//draw player
-			player.draw(g2);
+				}
 			
+			for(int i = 0; i < obj.length; i++) {
+				if(obj[i] != null) {
+					entityList.add(obj[i]);
+				}
+				}
+			
+			//SORT
+			Collections.sort(entityList, new Comparator<Entity>(){
+				//sort entity list by worldY 
+				@Override
+				public int compare(Entity e1, Entity e2) {
+					
+					int result = Integer.compare(e1.worldY, e2.worldY);
+					return result;
+				}
+				
+			});
+			
+			//Draw Entities
+			for(int i = 0; i <entityList.size(); i++) {
+				entityList.get(i).draw(g2);
+			}
+			//EMPTY ENTITY LIST
+			for(int i = 0; i <entityList.size(); i++) {
+				entityList.remove(i);
+			}
 			//draw ui
 			ui.draw(g2);
 			//DEBUG 
