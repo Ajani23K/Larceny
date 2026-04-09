@@ -37,7 +37,7 @@ public class Entity {
 	String dialogues[] = new String[20];
 	
 	int dialogueIndex = 0;
-	
+	public int type;
 	//Character Status
 	public int maxLife;
 	public int life;
@@ -80,8 +80,16 @@ public class Entity {
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
 		gp.cChecker.checkObject(this, false);
-		gp.cChecker.checkPlayer(this);
+		gp.cChecker.checkEntity(this, gp.npc);
+		gp.cChecker.checkEntity(this, gp.monster);
+		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
+		if(this.type == 2 && contactPlayer == true) {
+			if(gp.player.invincible == false) {
+				gp.player.life -= 1;
+				gp.player.invincible = true;
+			}
+		}
 		if(collisionOn == false) {
 			
 			switch(direction) {	

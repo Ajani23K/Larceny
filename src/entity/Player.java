@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -23,6 +24,8 @@ public class Player extends Entity{
 	public final int screenX;
 	public final int screenY;
 	public boolean inStore = false;
+	public boolean invincible = false;
+	public int invincibleCounter;
 	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
@@ -37,7 +40,7 @@ public class Player extends Entity{
 		screenX = gp.ScreenWidth/2 - (gp.tileSize/2);
 		screenY = gp.ScreenHeight/2 - (gp.tileSize/2);
 		
-		solidArea = new Rectangle(8,16,32,32); //collision area x,y,width, height
+		solidArea = new Rectangle(8,16,25,25); //collision area x,y,width, height
 		
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y; //record default values because they will change later
@@ -176,7 +179,14 @@ public class Player extends Entity{
 			}
 			break;
 		}
+		
+		if(invincible) {
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)); //setting opacity of character to 70%
+		}
 		g2.drawImage(image, screenX, screenY, null);
+		
+		//reset opacity
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)); //setting opacity of character to 70%
 		
 	}
 	public void playerMovement() {
@@ -210,6 +220,10 @@ public class Player extends Entity{
 		//check NPC collision
 		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
 		interactNPC(npcIndex);
+		
+		//check Monster collision
+		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+		contactMonster(monsterIndex);
 		
 		//check event
 		gp.eventHandler.checkEvent();
@@ -250,6 +264,14 @@ public class Player extends Entity{
 			}
 			spriteCounter = 0;
 		}
+		}
+		
+		if(invincible) {
+			invincibleCounter++;
+			if(invincibleCounter> 60) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
 		}
 		
 	}
@@ -297,6 +319,16 @@ public class Player extends Entity{
 			gp.gameState = gp.dialogueState;
 			gp.npc[i].speak();
 		}
+		}
+		
+	}
+	public void contactMonster(int i) {
+		if(i != 999) {
+			
+			if(invincible == false) {
+			life -= 1;
+			invincible = true;
+			}
 		}
 		
 	}

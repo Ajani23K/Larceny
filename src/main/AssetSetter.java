@@ -3,6 +3,7 @@ package main;
 import entity.NPC_Bob;
 import map.Map_BobsBodega;
 import map.Map_World;
+import monster.MON_Police;
 import object.OBJ_Dollar;
 import object.OBJ_Door;
 import object.OBJ_Soda;
@@ -57,5 +58,14 @@ public class AssetSetter {
 	}
 	public void readObjectMap() {
 		
+	}
+	public void setMonster() {
+		gp.monster[0] = new MON_Police(gp);
+		gp.monster[0].worldX = 24 * gp.tileSize;
+		gp.monster[0].worldY = 8 * gp.tileSize;
+		
+		gp.monster[1] = new MON_Police(gp);
+		gp.monster[1].worldX = 27 * gp.tileSize;
+		gp.monster[1].worldY = 9 * gp.tileSize;
 	}
 }
