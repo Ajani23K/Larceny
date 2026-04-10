@@ -2,10 +2,12 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class KeyHandler implements KeyListener{
+public class KeyHandler implements KeyListener, MouseListener{
 
-	public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed, rPressed, m1Pressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	public boolean showGridLocation = false;
@@ -72,7 +74,10 @@ public class KeyHandler implements KeyListener{
 			if(gp.gameState == gp.playState) {
 				gp.gameState = gp.pauseState;
 			}
-		}
+			}
+			if(code == KeyEvent.VK_R) {
+				rPressed = true;
+			}
 		
 		//DEBUG
 			//check draw time
@@ -132,7 +137,40 @@ public class KeyHandler implements KeyListener{
 		}if(code == KeyEvent.VK_E) {
 			ePressed = false;
 		}
+		if(code == KeyEvent.VK_R) {
+			rPressed = false;
+		}
 		
 	}
+	public void mousePressed(MouseEvent e) {
+		int code = e.getButton();
+		
+		if(code == MouseEvent.BUTTON1) {
+			m1Pressed = true;
+		}
+	}
+	public void mouseReleased(MouseEvent e) {
+		int code = e.getButton();
+		
+		if(code == MouseEvent.BUTTON1) {
+			m1Pressed = false;
+		}
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }

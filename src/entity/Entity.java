@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,14 +15,21 @@ public class Entity {
 
 	GamePanel gp;
 	public int worldX,worldY;
-	public int speed;
+
 	
 	public BufferedImage 	up1, up2, up3, up4, up5, 
 							down1, down2, down3, down4, down5, 
 							left1, left2, left3, left4, left5, 
 							right1, right2, right3, right4, right5;
+	
+	public BufferedImage 	attackup1, attackup2, attackup3, attackup4, attackup5, 
+	attackdown1, attackdown2, attackdown3, attackdown4, attackdown5, 
+	attackleft1, attackleft2, attackleft3, attackleft4, attackleft5, 
+	attackright1, attackright2, attackright3, attackright4, attackright5;
+	
 	public String direction = "down";
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+	public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
 	public int solidAreaDefaultX, solidAreaDefaultY;
 	public boolean collisionOn = false;
 	
@@ -36,11 +44,17 @@ public class Entity {
 	
 	String dialogues[] = new String[20];
 	
-	int dialogueIndex = 0;
 	public int type;
+	int dialogueIndex = 0;
+	
 	//Character Status
 	public int maxLife;
 	public int life;
+	public int speed;
+	public boolean attacking = false;
+	public boolean invincible = false;
+	public int invincibleCounter;
+	
 	
 	
 	public Entity(GamePanel gp) {
@@ -107,6 +121,13 @@ public class Entity {
 				break;
 			}
 		}
+		if(invincible) {
+			invincibleCounter++;
+			if(invincibleCounter> 30) {
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
 	}
 	public void draw(Graphics2D g2) {
 		
@@ -146,7 +167,13 @@ public class Entity {
 		
 				break;
 			}
+			if(invincible) {
+				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f)); //setting opacity of character to 70%
+			}
+			
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			//reset opacity
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 		}
 	}
 	public BufferedImage setup(String imagePath) {
@@ -157,6 +184,19 @@ public class Entity {
 		try {
 			image = ImageIO.read(getClass().getResource(imagePath+".png"));
 			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		return image;
+	}
+	public BufferedImage setup(String imagePath, int width, int height) {
+		//scaling up the images so it doesnt have to be done in draw method
+		UtilityTool uTool = new UtilityTool();
+		BufferedImage image = null;
+		
+		try {
+			image = ImageIO.read(getClass().getResource(imagePath+".png"));
+			image = uTool.scaleImage(image, width, height);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
