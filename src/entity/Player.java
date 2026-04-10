@@ -190,7 +190,7 @@ public class Player extends Entity{
 		
 	}
 	public void playerMovement() {
-		if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true ||  keyH.leftPressed == true) {
+		if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true ||  keyH.leftPressed == true || keyH.ePressed == true) {
 			if(keyH.upPressed == true) {
 				direction = "up";
 			
@@ -228,10 +228,10 @@ public class Player extends Entity{
 		//check event
 		gp.eventHandler.checkEvent();
 		
-		keyH.ePressed = false;
+		
 		
 		//if collision is false, player can move 
-		if(collisionOn == false) {
+		if(collisionOn == false && keyH.ePressed == false) {
 			
 			switch(direction) {	
 			case "up":
@@ -248,6 +248,9 @@ public class Player extends Entity{
 				break;
 			}
 		}
+		
+		keyH.ePressed = false;
+		
 		spriteCounter++;
 		//player image changes every 3 frames
 		if(spriteCounter > 3) {
