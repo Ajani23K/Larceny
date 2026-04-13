@@ -64,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int MaxWorldRow;
 	public int WorldWidth;
 	public int WorldHeight;
+	public int defaultOBJMAP = 2;
 	
 
 	//constructor to set panel size
@@ -99,7 +100,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public void setupGame() {
 		
-		aSetter.setObject();
+		aSetter.setObject(defaultOBJMAP);
 		aSetter.setNPC();
 		aSetter.setMonster();
 		gameState = titleState;

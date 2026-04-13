@@ -143,7 +143,7 @@ public class TileManager {
 					String sworldCol =  Integer.toString(worldCol);
 					String stileNum = "("+sworldCol+", "+sworldRow+")";
 					g2.setColor(Color.green);
-					g2.drawString(stileNum, screenX+gp.tileSize/4, screenY+gp.tileSize/2);
+					g2.drawString(stileNum, screenX, screenY+gp.tileSize/2);
 				}
 			}
 			
