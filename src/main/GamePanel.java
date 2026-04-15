@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	public SuperMap map[] = new SuperMap[10];
 	TileManager tileM;
-	KeyHandler keyH; //adding keyhandler so we can move character
+	public KeyHandler keyH; //adding keyhandler so we can move character
 	Thread GameThread; //this will allow us to run mechanics indefinitely, such as creating 60 frames per second
 	public CollisionChecker cChecker;
 	public AssetSetter aSetter;

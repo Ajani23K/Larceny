@@ -12,14 +12,15 @@ public class MON_Police extends Entity{
 		
 		type = 2;
 		name = "Police";
+		monster = true;
 		speed = 2;
 		maxLife = 3;
 		life = maxLife;
 		
-		solidArea.x = 3;
-		solidArea.y = 1;
+		solidArea.x = 8;
+		solidArea.y = 2;
 		solidArea.width = 10*3;
-		solidArea.height = 12*3;
+		solidArea.height = 13*3;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
 		

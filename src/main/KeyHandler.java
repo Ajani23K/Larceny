@@ -11,6 +11,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	public boolean showGridLocation = false;
+	public boolean showHitbox = false;
 	public KeyHandler(GamePanel gp) {
 		this.gp = gp;
 	}
@@ -99,6 +100,17 @@ public class KeyHandler implements KeyListener, MouseListener{
 					else if(showGridLocation  == true) {
 						
 					showGridLocation = false;
+					}
+			}
+			
+			if(code == KeyEvent.VK_U) {
+					if(showHitbox  == false) {
+					
+					showHitbox = true;
+					}
+					else if(showHitbox  == true) {
+						
+					showHitbox = false;
 					}
 			}
 		

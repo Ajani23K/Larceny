@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.GamePanel;
+import main.KeyHandler;
 import main.UtilityTool;
 
 public class Entity {
@@ -36,6 +38,8 @@ public class Entity {
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	
+	
+	public boolean monster = false;
 	public int actionLockCounter = 0;
 	
 	public BufferedImage image, image2, image3;
@@ -169,6 +173,14 @@ public class Entity {
 			}
 			if(invincible) {
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f)); //setting opacity of character to 70%
+			}
+			
+			if(gp.keyH.showHitbox) {
+				System.out.println("showhitbox true");
+				if(monster == true) {
+					g2.setColor(Color.white);
+				g2.drawRect(screenX+solidArea.x, screenY+solidArea.y, solidArea.width, solidArea.height);
+				}
 			}
 			
 			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
