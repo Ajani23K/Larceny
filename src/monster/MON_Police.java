@@ -56,5 +56,9 @@ public class MON_Police extends Entity{
 		}
 		
 	}
+	public void damageReaction() {
+		actionLockCounter = 0;
+		direction = getPlayerDirection();
+	}
 
 }
