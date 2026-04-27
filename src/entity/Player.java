@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.AssetSetter;
 import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
@@ -20,7 +21,9 @@ public class Player extends Entity{
 	
 	KeyHandler keyH;
 	TileManager tileM;
+	AssetSetter aSetter;
 	SuperMap map[];
+	public String playerStoreLocation = "";
 	public final int screenX;
 	public final int screenY;
 	public boolean inStore = false;
@@ -28,10 +31,10 @@ public class Player extends Entity{
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
 	
-	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[]) {
+	public Player(GamePanel gp, KeyHandler keyH, TileManager tileM, SuperMap map[], AssetSetter aSetter) {
 		super(gp);
 		
-
+		this.aSetter = aSetter;
 		invincible = false;
 		this.keyH = keyH;
 		this.tileM = tileM;
@@ -461,14 +464,27 @@ public class Player extends Entity{
 			
 				if(inStore == false) {
 					if(System.nanoTime() - startTime >= cooldownTime) {
-						tileM.changeMap(map[1]);
-						inStore = true;
+						
+						//world x, worldy, obj worldx, obj world y
+						if(checkObjectLocation(3, 6, gp.obj[i].worldX, gp.obj[i].worldY) || checkObjectLocation(4, 6, gp.obj[i].worldX, gp.obj[i].worldY)) {
+							//doors assigned tile map, doors object map, where to move player x, where to move player y
+							tileM.changeMap(map[1]);
+							aSetter.setObject(3);
+							worldX = (int)(3.5*gp.tileSize);
+							worldY = 9*gp.tileSize;
+							inStore = true;
+							playerStoreLocation = "BobsBodega";
+						}
+						
+						
 						startTime = System.nanoTime();
 					}
 				}
 				else {	
 					if(System.nanoTime() - startTime >= cooldownTime) {
 					tileM.changeMap(map[0]);
+					setPlayerExitLocation();
+					aSetter.setObject(gp.defaultOBJMAP);
 					inStore = false;
 					startTime = System.nanoTime();
 					}
@@ -521,5 +537,22 @@ public class Player extends Entity{
 				}
 			}
 		}
+	}
+	public boolean checkObjectLocation(int worldX, int worldY, int objX, int objY) {
+		System.out.println("OBJECT X: "+ objX+", "+ "OBJECT Y: "+ objY);
+		System.out.println("WORLDX CHECK: "+ worldX*gp.tileSize+", "+ "WORLDY CHECK: "+ gp.tileSize*worldY);
+		if(worldX*gp.tileSize == objX && gp.tileSize*worldY == objY) {
+			
+			return true;
+		}
+		return false;
+	}
+	public void setPlayerExitLocation() {
+		switch(playerStoreLocation) {
+		case "BobsBodega":
+			worldX = (int)(3.5*gp.tileSize);
+			worldY = 7*gp.tileSize;
+		}
+		playerStoreLocation = "";
 	}
 }

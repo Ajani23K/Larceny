@@ -55,6 +55,7 @@ public class Entity {
 	int dyingCounter;
 	boolean hpBarOn = false;
 	int hpBarCounter;
+	public int invincibleCounter;
 	
 	//Character Status
 	public int maxLife;
@@ -62,7 +63,10 @@ public class Entity {
 	public int speed;
 	public boolean attacking = false;
 	public boolean invincible = false;
-	public int invincibleCounter;
+	
+	
+	
+	
 	
 	
 	

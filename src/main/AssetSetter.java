@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import entity.NPC_Bob;
 import map.Map_BobsBodega;
+import map.Map_OBJBobsBodega;
 import map.Map_OBJWorld;
 import map.Map_World;
 import map.SuperMap;
@@ -21,18 +22,27 @@ public class AssetSetter {
 	public int OBJTileNum[][];
 	int objectCount = 0;
 	int currentOBJMAP;
+	boolean clearobj = false;
 	public AssetSetter(GamePanel gp) {
 		this.gp = gp;
 		
 	}
 	
 	public void setObject(int i) {
+		if(clearobj) {
+			for(int t = 0; t < gp.obj.length; t++) {
+				gp.obj[t] = null;
+			}
+			clearobj = false;
+		}
 		OBJTileNum = new int [gp.map[i].worldCol][gp.map[i].worldRow];
 		currentOBJMAP = i;
 		loadObjectMap(gp.map[i]);
 		readObjectMap();
 		//reset object count after reading object map
+		
 		objectCount = 0;
+		clearobj = true;
 		
 		/*gp.obj[0] = new OBJ_Dollar(gp);
 		gp.obj[0].worldX = 24 * gp.tileSize;
@@ -62,6 +72,7 @@ public class AssetSetter {
 		gp.map[0] = new Map_World();
 		gp.map[1] = new Map_BobsBodega();
 		gp.map[2] = new Map_OBJWorld();
+		gp.map[3] = new Map_OBJBobsBodega();
 	}
 	public void setNPC() {
 		
