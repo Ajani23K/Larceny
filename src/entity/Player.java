@@ -63,8 +63,14 @@ public class Player extends Entity{
 		
 		//player status
 		//1 life = half heart, 2 life = full heart
+		weight = 150;
+		height = 4;
+		bodyType = "Slim";
+		playerPassive = "None";
 		maxLife = 6;
 		life = maxLife;
+		money = 0;
+		currentWeapon = null;
 		
 	}
 	public void getPlayerImage(){

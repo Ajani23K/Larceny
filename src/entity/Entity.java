@@ -64,9 +64,17 @@ public class Entity {
 	public boolean attacking = false;
 	public boolean invincible = false;
 	
+	public int weight;
+	public int height;
+	public String bodyType;
+	public String playerPassive;
 	
+	public int money;
+	public Entity currentWeapon;
 	
-	
+	//Item attributes
+	public int attackValue;
+	public int defenseValue;
 	
 	
 	

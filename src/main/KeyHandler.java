@@ -27,38 +27,61 @@ public class KeyHandler implements KeyListener, MouseListener{
 		//titleState
 		if(gp.gameState == gp.titleState) {
 			
-			if(code == KeyEvent.VK_W) {
-				if(gp.ui.commandNum== 0) {
-					gp.ui.commandNum = 2;
-				}else {
-				gp.ui.commandNum--;
-				}
-			}
-			if(code == KeyEvent.VK_S) {
-				if(gp.ui.commandNum==2) {
-					gp.ui.commandNum = 0;
-				}else {
-				gp.ui.commandNum++;
-				}	
-			}
-			if(code == KeyEvent.VK_ENTER) {
-				if(gp.ui.commandNum == 0) {
-					gp.gameState = gp.playState;
-				}
-				if(gp.ui.commandNum == 1) {
-					//add later
-				}
-				if(gp.ui.commandNum == 2) {
-					System.exit(0);
-				}
-			}
+			titleState(code);
 		}
 		
 		
 		//playState
 		if(gp.gameState == gp.playState) {
 			
-			if(code == KeyEvent.VK_W) {
+			playState(code);
+		
+		}
+		//pauseState
+		else if(gp.gameState == gp.pauseState) {
+			if(gp.gameState == gp.pauseState) {
+				gp.gameState = gp.playState;
+			}
+		}
+		
+		//dialogueState
+		else if(gp.gameState == gp.dialogueState) {
+			dialogueState(code);
+		}
+		//characterState
+		else if(gp.gameState == gp.characterState) {
+			characterState(code);
+		}
+	}
+	public void titleState(int code) {
+		if(code == KeyEvent.VK_W) {
+			if(gp.ui.commandNum== 0) {
+				gp.ui.commandNum = 2;
+			}else {
+			gp.ui.commandNum--;
+			}
+		}
+		if(code == KeyEvent.VK_S) {
+			if(gp.ui.commandNum==2) {
+				gp.ui.commandNum = 0;
+			}else {
+			gp.ui.commandNum++;
+			}	
+		}
+		if(code == KeyEvent.VK_ENTER) {
+			if(gp.ui.commandNum == 0) {
+				gp.gameState = gp.playState;
+			}
+			if(gp.ui.commandNum == 1) {
+				//add later
+			}
+			if(gp.ui.commandNum == 2) {
+				System.exit(0);
+			}
+		}
+	}
+	public void playState(int code) {
+		if(code == KeyEvent.VK_W) {
 			upPressed = true;
 			}
 			if(code == KeyEvent.VK_A) {
@@ -78,6 +101,13 @@ public class KeyHandler implements KeyListener, MouseListener{
 			}
 			if(code == KeyEvent.VK_R) {
 				rPressed = true;
+			}
+			
+			if(code == KeyEvent.VK_I) {
+				System.out.println("Tab Pressed");
+				if(gp.gameState == gp.playState) {
+					gp.gameState = gp.characterState;
+				}
 			}
 		
 		//DEBUG
@@ -113,20 +143,15 @@ public class KeyHandler implements KeyListener, MouseListener{
 					showHitbox = false;
 					}
 			}
-		
+	}
+	public void characterState(int code) {
+		if(code == KeyEvent.VK_I) {
+			gp.gameState = gp.playState;
 		}
-		//pauseState
-		else if(gp.gameState == gp.pauseState) {
-			if(gp.gameState == gp.pauseState) {
-				gp.gameState = gp.playState;
-			}
-		}
-		
-		//dialogueState
-		else if(gp.gameState == gp.dialogueState) {
-			if(code == KeyEvent.VK_SPACE) {
-				gp.gameState = gp.playState;
-			}
+	}
+	public void dialogueState(int code) {
+		if(code == KeyEvent.VK_SPACE) {
+			gp.gameState = gp.playState;
 		}
 	}
 

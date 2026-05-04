@@ -62,6 +62,10 @@ public class UI {
 			drawPlayerLife();
 			drawDialogueScreen();
 		}
+		if(gp.gameState == gp.characterState) {
+			drawPlayerLife();
+			drawCharacterScreen();
+		}
 		//Message
 		if(messageOn == true) {
 			g2.setFont(g2.getFont().deriveFont(30F));
@@ -74,6 +78,69 @@ public class UI {
 				messageOn = false;
 			}
 		}
+	}
+	public void drawCharacterScreen() {
+		
+		final int frameX = gp.tileSize;
+		final int frameY = gp.tileSize * 2;
+		final int frameWidth = gp.tileSize * 5;
+		final int frameHeight = gp.tileSize * 10;
+		drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+		
+		g2.setColor(Color.white);
+		g2.setFont(g2.getFont().deriveFont(20F));
+		
+		int textX = frameX + 20;
+		int textY = frameY + gp.tileSize;
+		
+		final int lineHeight = gp.tileSize;
+		
+		g2.drawString("Weight", textX, textY);
+		textY+= lineHeight;
+		g2.drawString("Height", textX, textY);
+		textY+= lineHeight;
+		g2.drawString("Body Type", textX, textY);
+		textY+= lineHeight;
+		g2.drawString("Passive", textX, textY);
+		textY+= lineHeight;
+		g2.drawString("Money", textX, textY);
+		textY+= lineHeight;
+		
+		//Values
+		int tailX = (frameX+frameWidth) - 30;
+		
+		//reset textY
+		textY = frameY + gp.tileSize;
+		String value;
+		
+		value = String.valueOf(gp.player.weight);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, textX, textY);
+		textY+= lineHeight;
+		
+		value = String.valueOf(gp.player.height);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, textX, textY);
+		textY+= lineHeight;
+		
+		value = String.valueOf(gp.player.bodyType);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, textX, textY);
+		textY+= lineHeight;
+		
+		value = String.valueOf(gp.player.playerPassive);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, textX, textY);
+		textY+= lineHeight;
+		
+		value = String.valueOf(gp.player.money);
+		textX = getXforAlignToRightText(value, tailX);
+		g2.drawString(value, textX, textY);
+		textY+= lineHeight;
+		
+		
+		
+		
 	}
 	public void drawPlayerLife() {
 		
@@ -201,6 +268,11 @@ public class UI {
 	public int getXforCenteredText(String text) {
 		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = gp.ScreenWidth/2 - length/2;
+		return x;
+	}
+	public int getXforAlignToRightText(String text, int tailX) {
+		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+		int x = tailX - length;
 		return x;
 	}
 	
