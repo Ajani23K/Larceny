@@ -148,11 +148,32 @@ public class KeyHandler implements KeyListener, MouseListener{
 		if(code == KeyEvent.VK_I) {
 			gp.gameState = gp.playState;
 		}
+		if(code == KeyEvent.VK_W) {
+			if(gp.ui.slotRow != 0) {
+			gp.ui.slotRow--;
+			}
+		}
+		if(code == KeyEvent.VK_A) {
+			if(gp.ui.slotCol != 0) {
+			gp.ui.slotCol--;
+			}
+		}
+		if(code == KeyEvent.VK_S) {
+			if(gp.ui.slotRow != 3) {
+			gp.ui.slotRow++;
+			}
+		}
+		if(code == KeyEvent.VK_D) {
+			if(gp.ui.slotCol != 4) {
+			gp.ui.slotCol++;
+			}
+		}
 	}
 	public void dialogueState(int code) {
 		if(code == KeyEvent.VK_SPACE) {
 			gp.gameState = gp.playState;
 		}
+		
 	}
 
 	@Override

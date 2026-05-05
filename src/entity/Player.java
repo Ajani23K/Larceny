@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -14,6 +15,8 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
 import map.SuperMap;
+import object.OBJ_Dollar;
+import object.OBJ_Soda;
 import tile.TileManager;
 
 public class Player extends Entity{
@@ -27,6 +30,8 @@ public class Player extends Entity{
 	public final int screenX;
 	public final int screenY;
 	public boolean inStore = false;
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public final int maxInventorySize = 20;
 	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
@@ -53,6 +58,7 @@ public class Player extends Entity{
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
+		setItems();
 	}
 	public void setDefaultValues() {
 		
@@ -73,6 +79,11 @@ public class Player extends Entity{
 		currentWeapon = null;
 		
 	}
+	public void setItems() {
+		
+		inventory.add(new OBJ_Soda(gp));
+		inventory.add(new OBJ_Dollar(gp));
+			}
 	public void getPlayerImage(){
 		
 	

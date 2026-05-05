@@ -15,6 +15,7 @@ public class OBJ_Dollar extends Entity{
 		super(gp);
 		name = "Dollar";
 		down1 = setup("/objects/DollarObjectWIP");
+		description = "[" + name + "]\nNever enough to buy \nhappiness.";
 		
 	}
 }

@@ -15,6 +15,7 @@ public class OBJ_Soda extends Entity{
 		super(gp);
 		name = "Soda";
 		down1 = setup("/objects/SodaObjectWIP");
+		description = "[" + name + "]\nA sweet beverage.";
 		
 	}
 }
