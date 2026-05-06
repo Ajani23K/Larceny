@@ -404,7 +404,9 @@ public class Player extends Entity{
 		
 		//check Object collision
 		int objIndex = gp.cChecker.checkObject(this, true);
+		interactDoor(objIndex);
 		pickUpObject(objIndex);
+		
 		
 		//check NPC collision
 		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -470,52 +472,17 @@ public class Player extends Entity{
 	public void pickUpObject(int i) {
 		
 		if(i != 999) {
-			
+			String text;
 			String objectName = gp.obj[i].name;
-			
-			switch(objectName) {
-			case "Dollar":
-			
-				break;
-			case "Door":
-			
-				if(inStore == false) {
-					if(System.nanoTime() - startTime >= cooldownTime) {
-						
-						//world x, worldy, obj worldx, obj world y
-						if(checkObjectLocation(3, 6, gp.obj[i].worldX, gp.obj[i].worldY) || checkObjectLocation(4, 6, gp.obj[i].worldX, gp.obj[i].worldY)) {
-							//doors assigned tile map, doors object map, where to move player x, where to move player y
-							tileM.changeMap(map[1]);
-							aSetter.setObject(3);
-							worldX = (int)(3.5*gp.tileSize);
-							worldY = 9*gp.tileSize;
-							inStore = true;
-							playerStoreLocation = "BobsBodega";
-						}
-						
-						
-						startTime = System.nanoTime();
-					}
+			if(inventory.size() != maxInventorySize) {
+				if(objectName != "Door" && objectName != "Trashcan") {
+				inventory.add(gp.obj[i]);
+				removeObject(i);
 				}
-				else {	
-					if(System.nanoTime() - startTime >= cooldownTime) {
-					tileM.changeMap(map[0]);
-					setPlayerExitLocation();
-					aSetter.setObject(gp.defaultOBJMAP);
-					inStore = false;
-					startTime = System.nanoTime();
-					}
-				}
-				break;
-			case "Trashcan":
-				break;
-			case "Soda":
-				speed+=2;
-				gp.ui.showMessage("You Feel Hastened!");
-				gp.obj[i] = null;
-				break;
+			}else {
+				text = "Your bag is full!";
 			}
-		}	
+		}
 	}
 	public void interactNPC(int i) {
 		
@@ -571,5 +538,45 @@ public class Player extends Entity{
 			worldY = 7*gp.tileSize;
 		}
 		playerStoreLocation = "";
+	}
+	public void interactDoor(int i) {
+		
+		if(i != 999) {
+			String objectname = gp.obj[i].name;
+			if(objectname == "Door") {
+			
+				
+				if(inStore == false) {
+					if(System.nanoTime() - startTime >= cooldownTime) {
+						
+						//world x, worldy, obj worldx, obj world y
+						if(checkObjectLocation(3, 6, gp.obj[i].worldX, gp.obj[i].worldY) || checkObjectLocation(4, 6, gp.obj[i].worldX, gp.obj[i].worldY)) {
+							//doors assigned tile map, doors object map, where to move player x, where to move player y
+							tileM.changeMap(map[1]);
+							aSetter.setObject(3);
+							worldX = (int)(3.5*gp.tileSize);
+							worldY = 9*gp.tileSize;
+							inStore = true;
+							playerStoreLocation = "BobsBodega";
+						}
+						
+						
+						startTime = System.nanoTime();
+					}
+				}
+				else {	
+					if(System.nanoTime() - startTime >= cooldownTime) {
+					tileM.changeMap(map[0]);
+					setPlayerExitLocation();
+					aSetter.setObject(gp.defaultOBJMAP);
+					inStore = false;
+					startTime = System.nanoTime();
+					}
+				}
+			}
+		}
+	}
+	public void removeObject(int i) {
+		gp.obj[i] = null;
 	}
 }

@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity npc[] = new Entity[10];
 	public EventHandler eventHandler;
 	public Entity monster[] = new Entity[20];
-	
+
 	ArrayList<Entity> entityList = new ArrayList<>();
 	//Game state
 	
@@ -66,6 +66,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public int WorldWidth;
 	public int WorldHeight;
 	public int defaultOBJMAP = 2;
+	
 	
 
 	//constructor to set panel size

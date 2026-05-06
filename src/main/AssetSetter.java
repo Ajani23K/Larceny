@@ -22,6 +22,8 @@ public class AssetSetter {
 	public int OBJTileNum[][];
 	int objectCount = 0;
 	int currentOBJMAP;
+	int worldCount = 0;
+	int bobBodegaCount = 0;
 	boolean clearobj = false;
 	public AssetSetter(GamePanel gp) {
 		this.gp = gp;
@@ -37,8 +39,11 @@ public class AssetSetter {
 		}
 		OBJTileNum = new int [gp.map[i].worldCol][gp.map[i].worldRow];
 		currentOBJMAP = i;
+		
 		loadObjectMap(gp.map[i]);
+		
 		readObjectMap();
+		
 		//reset object count after reading object map
 		
 		objectCount = 0;
@@ -123,7 +128,7 @@ public class AssetSetter {
 		int x;
 		int y;
 		
-		
+	
 		while(worldRow < gp.map[currentOBJMAP].worldRow) {
 			int OBJNum = OBJTileNum[0][worldRow];
 			x = OBJTileNum[1][worldRow];
@@ -136,6 +141,8 @@ public class AssetSetter {
 		
 			
 		}
+		
+		
 	}
 	public void setMonster() {
 		gp.monster[0] = new MON_Police(gp);
@@ -172,4 +179,25 @@ public class AssetSetter {
 		
 		objectCount++;
 	}
+
+
+	public int switchNameToInt(String name) {
+		int numVarName = 0;
+		switch(name) {
+		case "Door":
+			numVarName = 0;
+			break;
+		case "Trashcan":
+			numVarName = 1;
+			break;
+		case "Soda":
+			numVarName = 2;
+			break;
+		case "Dollar":
+			numVarName = 3;
+			break;
+		}
+		return numVarName;
+	}
+	
 }
