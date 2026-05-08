@@ -475,7 +475,7 @@ public class Player extends Entity{
 			String text;
 			String objectName = gp.obj[i].name;
 			if(inventory.size() != maxInventorySize) {
-				if(objectName != "Door" && objectName != "Trashcan") {
+				if(gp.obj[i].pickable) {
 				inventory.add(gp.obj[i]);
 				removeObject(i);
 				}

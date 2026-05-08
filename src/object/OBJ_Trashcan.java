@@ -11,7 +11,7 @@ public class OBJ_Trashcan extends Entity{
 		
 		super(gp);
 		name = "Trashcan";
-		down1 = setup("/objects/TrashcanObjectWIP");
+		down1 = setup("/objects/TrashcanObject");
 		
 		collision = true;
 		solidArea.x = 20;

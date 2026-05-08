@@ -76,6 +76,7 @@ public class Entity {
 	public int attackValue;
 	public int defenseValue;
 	public String description = "";
+	public boolean pickable = false;
 	
 	
 	public Entity(GamePanel gp) {

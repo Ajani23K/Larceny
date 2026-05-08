@@ -11,8 +11,14 @@ import map.Map_OBJWorld;
 import map.Map_World;
 import map.SuperMap;
 import monster.MON_Police;
+import object.OBJ_CounterEdgeLeft;
+import object.OBJ_CounterEdgeRight;
+import object.OBJ_CounterMiddle;
+import object.OBJ_CounterSideLeft;
+import object.OBJ_CounterSideRight;
 import object.OBJ_Dollar;
 import object.OBJ_Door;
+import object.OBJ_Sign;
 import object.OBJ_Soda;
 import object.OBJ_Trashcan;
 
@@ -154,6 +160,12 @@ public class AssetSetter {
 		gp.monster[1].worldY = 9 * gp.tileSize;
 	}
 	public void setObjectLocation(int objNum, int col, int row) {
+		/* 0 = door, 1 = trashcan, 2 = soda, 3 = dollar, 4 = sign, 5 = right counter, 6 = middle counter, 7 = left counter, 8 = sideleft counter, 9 = sideright counter,
+		 * 
+		 * 
+		 * 
+		 * 
+		 * */
 		switch(objNum) {
 		case 0:
 			gp.obj[objectCount] = new OBJ_Door(gp);
@@ -172,6 +184,36 @@ public class AssetSetter {
 			break;
 		case 3:
 			gp.obj[objectCount] = new OBJ_Dollar(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 4:
+			gp.obj[objectCount] = new OBJ_Sign(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 5:
+			gp.obj[objectCount] = new OBJ_CounterEdgeRight(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 6:
+			gp.obj[objectCount] = new OBJ_CounterMiddle(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 7:
+			gp.obj[objectCount] = new OBJ_CounterEdgeLeft(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 8:
+			gp.obj[objectCount] = new OBJ_CounterSideLeft(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 9:
+			gp.obj[objectCount] = new OBJ_CounterSideRight(gp);
 			gp.obj[objectCount].worldX = col * gp.tileSize;
 			gp.obj[objectCount].worldY = row * gp.tileSize;
 			break;

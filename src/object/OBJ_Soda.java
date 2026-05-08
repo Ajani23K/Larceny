@@ -14,8 +14,9 @@ public class OBJ_Soda extends Entity{
 		
 		super(gp);
 		name = "Soda";
-		down1 = setup("/objects/SodaObjectWIP");
+		down1 = setup("/objects/SodaObject");
 		description = "[" + name + "]\nA sweet beverage.";
+		pickable = true;
 		
 	}
 }
