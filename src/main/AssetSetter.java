@@ -241,5 +241,17 @@ public class AssetSetter {
 		}
 		return numVarName;
 	}
+	public void moveNPC(int i) {
+		switch(i) {
+		case 0:
+			if(gp.player.inStore) {
+				gp.npc[0].worldX = gp.tileSize*3;
+				gp.npc[0].worldY = gp.tileSize*65;
+			}else {
+				gp.npc[0].worldX = gp.tileSize*2;
+				gp.npc[0].worldY = gp.tileSize*7;
+			}
+		}
+	}
 	
 }

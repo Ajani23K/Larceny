@@ -552,11 +552,12 @@ public class Player extends Entity{
 						//world x, worldy, obj worldx, obj world y
 						if(checkObjectLocation(3, 6, gp.obj[i].worldX, gp.obj[i].worldY) || checkObjectLocation(4, 6, gp.obj[i].worldX, gp.obj[i].worldY)) {
 							//doors assigned tile map, doors object map, where to move player x, where to move player y
-							tileM.changeMap(map[1]);
-							aSetter.setObject(3);
+						
+							
 							worldX = (int)(3.5*gp.tileSize);
-							worldY = 9*gp.tileSize;
+							worldY = 73*gp.tileSize;
 							inStore = true;
+							aSetter.moveNPC(0);
 							playerStoreLocation = "BobsBodega";
 						}
 						
@@ -566,11 +567,12 @@ public class Player extends Entity{
 				}
 				else {	
 					if(System.nanoTime() - startTime >= cooldownTime) {
-					tileM.changeMap(map[0]);
+					
 					setPlayerExitLocation();
-					aSetter.setObject(gp.defaultOBJMAP);
 					inStore = false;
+					aSetter.moveNPC(0);
 					startTime = System.nanoTime();
+					
 					}
 				}
 			}
