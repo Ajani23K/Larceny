@@ -559,6 +559,8 @@ public class Player extends Entity{
 							inStore = true;
 							aSetter.moveNPC(0);
 							playerStoreLocation = "BobsBodega";
+							gp.crimeHandler.saveInventory(inventory);
+							
 						}
 						
 						
@@ -567,7 +569,7 @@ public class Player extends Entity{
 				}
 				else {	
 					if(System.nanoTime() - startTime >= cooldownTime) {
-					
+					gp.crimeHandler.checkStealing(inventory);
 					setPlayerExitLocation();
 					inStore = false;
 					aSetter.moveNPC(0);
@@ -581,4 +583,5 @@ public class Player extends Entity{
 	public void removeObject(int i) {
 		gp.obj[i] = null;
 	}
+	
 }

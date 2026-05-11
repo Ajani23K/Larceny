@@ -47,6 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity npc[] = new Entity[10];
 	public EventHandler eventHandler;
 	public Entity monster[] = new Entity[20];
+	public CrimeHandler crimeHandler;
 
 	ArrayList<Entity> entityList = new ArrayList<>();
 	//Game state
@@ -86,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
 		tileM = new TileManager(this, map[mapnum], keyH);
 		cChecker = new CollisionChecker(this);
 		eventHandler = new EventHandler(this);
+		crimeHandler = new CrimeHandler(this);
 		player = new Player(this,keyH, tileM, map, aSetter);
 		ui = new UI(this);
 		
