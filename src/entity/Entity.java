@@ -37,7 +37,8 @@ public class Entity {
 	
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	
+	public int entityWidth = 48;
+	public int entityHeight = 48;
 	
 	public boolean monster = false;
 	public int actionLockCounter = 0;
@@ -46,9 +47,9 @@ public class Entity {
 	public String name;
 	public boolean collision = false;
 	
-	String dialogues[] = new String[20];
+	public String dialogues[] = new String[20];
 	
-	public int type;
+	
 	int dialogueIndex = 0;
 	public boolean alive = true;
 	public boolean dying = false;
@@ -56,6 +57,7 @@ public class Entity {
 	boolean hpBarOn = false;
 	int hpBarCounter;
 	public int invincibleCounter;
+	public boolean talkative = false;
 	
 	//Character Status
 	public int maxLife;
@@ -78,9 +80,19 @@ public class Entity {
 	public String description = "";
 	public boolean pickable = false;
 	
+	public int type; // 0 = player, 1 = npc, 2 = monster
+	public final int type_player = 0;
+	public final int type_npc = 1;
+	public final int type_monster = 2;
+	public final int type_weapon = 3;
+	public final int type_consumable = 4;
+	public int healvalue = 1;
 	
 	public Entity(GamePanel gp) {
 		this.gp = gp;
+	}
+	public void use(Entity entity) {
+		
 	}
 	public void setAction() {
 		
@@ -123,7 +135,7 @@ public class Entity {
 		gp.cChecker.checkEntity(this, gp.monster);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
-		if(this.type == 2 && contactPlayer == true) {
+		if(this.type == type_monster && contactPlayer == true) {
 			if(gp.player.invincible == false) {
 				gp.player.life -= 1;
 				gp.player.invincible = true;
@@ -228,7 +240,7 @@ public class Entity {
 				dyingAnimation(g2);
 			}
 			
-			g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+			g2.drawImage(image, screenX, screenY, entityWidth, entityHeight, null);
 			//reset opacity
 			changeAlpha(g2, 1f);
 		}

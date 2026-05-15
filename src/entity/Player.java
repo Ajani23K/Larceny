@@ -406,7 +406,7 @@ public class Player extends Entity{
 		int objIndex = gp.cChecker.checkObject(this, true);
 		interactDoor(objIndex);
 		pickUpObject(objIndex);
-		
+		interactObject(objIndex);
 		
 		//check NPC collision
 		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -472,16 +472,18 @@ public class Player extends Entity{
 	public void pickUpObject(int i) {
 		
 		if(i != 999) {
-			String text;
+			String text = "";
 			String objectName = gp.obj[i].name;
 			if(inventory.size() != maxInventorySize) {
 				if(gp.obj[i].pickable) {
 				inventory.add(gp.obj[i]);
 				removeObject(i);
+				text = "You picked up a " + objectName + ".";
 				}
 			}else {
 				text = "Your bag is full!";
 			}
+			gp.ui.showMessage(text);
 		}
 	}
 	public void interactNPC(int i) {
@@ -583,5 +585,35 @@ public class Player extends Entity{
 	public void removeObject(int i) {
 		gp.obj[i] = null;
 	}
-	
+	public void interactObject(int i) {
+		if(i != 999) {
+			if(gp.obj[i] != null) {
+				if(gp.obj[i].talkative) {
+					if(keyH.ePressed == true) {
+						gp.gameState = gp.dialogueState;
+						gp.obj[i].speak();
+					}
+				}
+			}
+		}
+	}
+	public void selectItem() {
+		
+		int itemIndex = gp.ui.getItemIndexOnSlot();
+		
+		if(itemIndex < inventory.size()) {
+			
+			Entity selectedItem = inventory.get(itemIndex);
+			
+			if(selectedItem.type == type_weapon) {
+				currentWeapon = selectedItem;
+				
+			}
+			if(selectedItem.type == type_consumable) {
+				
+				selectedItem.use(this);
+				inventory.remove(itemIndex);
+			}
+		}
+	}
 }

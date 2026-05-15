@@ -98,10 +98,5 @@ public class EventHandler {
 		}
 		
 	}
-	public void payTender(int col, int row,int gameState) {
-		if(gp.keyH.ePressed == true) {
-			gp.gameState = gameState;
-			gp.ui.currentDialogue = "That will be ##";
-			}
-	}
+	
 }

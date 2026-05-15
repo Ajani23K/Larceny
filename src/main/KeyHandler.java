@@ -103,7 +103,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 				rPressed = true;
 			}
 			
-			if(code == KeyEvent.VK_I) {
+			if(code == KeyEvent.VK_TAB) {
 				System.out.println("Tab Pressed");
 				if(gp.gameState == gp.playState) {
 					gp.gameState = gp.characterState;
@@ -167,6 +167,9 @@ public class KeyHandler implements KeyListener, MouseListener{
 			if(gp.ui.slotCol != 4) {
 			gp.ui.slotCol++;
 			}
+		}
+		if(code == KeyEvent.VK_ENTER) {
+			gp.player.selectItem();
 		}
 	}
 	public void dialogueState(int code) {

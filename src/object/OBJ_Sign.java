@@ -9,7 +9,9 @@ public class OBJ_Sign extends Entity{
 		
 		super(gp);
 		name = "Sign";
-		down1 = setup("/objects/SignObject");
-		
+		down1 = setup("/objects/SignObject", 48, (int)(48*1.5));
+		collision = true;
+		entityWidth = gp.tileSize;
+		entityHeight = (int)(48*1.5);
 	}
 }

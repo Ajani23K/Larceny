@@ -18,6 +18,7 @@ import object.OBJ_CounterSideLeft;
 import object.OBJ_CounterSideRight;
 import object.OBJ_Dollar;
 import object.OBJ_Door;
+import object.OBJ_Gun;
 import object.OBJ_Sign;
 import object.OBJ_Soda;
 import object.OBJ_Trashcan;
@@ -216,6 +217,16 @@ public class AssetSetter {
 			gp.obj[objectCount] = new OBJ_CounterSideRight(gp);
 			gp.obj[objectCount].worldX = col * gp.tileSize;
 			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 10: 
+			gp.obj[objectCount] = new OBJ_Gun(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = row * gp.tileSize;
+			break;
+		case 11:
+			gp.obj[objectCount] = new OBJ_Sign(gp);
+			gp.obj[objectCount].worldX = col * gp.tileSize;
+			gp.obj[objectCount].worldY = (int)((row + .5) * gp.tileSize);
 			break;
 		}
 		

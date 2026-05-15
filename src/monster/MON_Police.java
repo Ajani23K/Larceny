@@ -10,7 +10,7 @@ public class MON_Police extends Entity{
 	public MON_Police(GamePanel gp) {
 		super(gp);
 		
-		type = 2;
+		type = type_monster;
 		name = "Police";
 		monster = true;
 		speed = 2;
@@ -60,5 +60,5 @@ public class MON_Police extends Entity{
 		actionLockCounter = 0;
 		direction = getPlayerDirection();
 	}
-
+	
 }
