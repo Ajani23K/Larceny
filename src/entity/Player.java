@@ -16,6 +16,7 @@ import main.KeyHandler;
 import main.UtilityTool;
 import map.SuperMap;
 import object.OBJ_Dollar;
+import object.OBJ_Punch;
 import object.OBJ_Soda;
 import tile.TileManager;
 
@@ -29,6 +30,7 @@ public class Player extends Entity{
 	public String playerStoreLocation = "";
 	public final int screenX;
 	public final int screenY;
+	public Entity Punch;
 	public boolean inStore = false;
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public final int maxInventorySize = 20;
@@ -76,8 +78,13 @@ public class Player extends Entity{
 		maxLife = 6;
 		life = maxLife;
 		money = 0;
-		currentWeapon = null;
+		Punch = new OBJ_Punch(gp);
+		currentWeapon = Punch;
+		setAttack();
 		
+	}
+	public void setAttack() {
+		playerAttack = currentWeapon.attackValue;
 	}
 	public void setItems() {
 		
@@ -116,30 +123,59 @@ public class Player extends Entity{
 		
 	}
 	public void getPlayerAttackImage() {
-		//down
-		attackdown1 = setup("/player/LarceyPunchDown1", gp.tileSize , gp.tileSize * 2);
-		attackdown2 = setup("/player/LarceyPunchDown2", gp.tileSize , gp.tileSize * 2);
-		attackdown3 = setup("/player/LarceyPunchDown3", gp.tileSize , gp.tileSize * 2);
-		attackdown4 = setup("/player/LarceyPunchDown4", gp.tileSize , gp.tileSize * 2);
-		attackdown5 = setup("/player/LarceyPunchDown5", gp.tileSize , gp.tileSize * 2);
-		//left
-		attackleft1 = setup("/player/LarceyPunchLeft1", gp.tileSize * 2, gp.tileSize);
-		attackleft2 = setup("/player/LarceyPunchLeft2", gp.tileSize * 2, gp.tileSize);
-		attackleft3 = setup("/player/LarceyPunchLeft3", gp.tileSize * 2, gp.tileSize);
-		attackleft4 = setup("/player/LarceyPunchLeft4", gp.tileSize * 2, gp.tileSize);
-		attackleft5 = setup("/player/LarceyPunchLeft5", gp.tileSize * 2, gp.tileSize);
-		//right
-		attackright1 = setup("/player/LarceyPunchRight1", gp.tileSize * 2, gp.tileSize);
-		attackright2 = setup("/player/LarceyPunchRight2", gp.tileSize * 2, gp.tileSize);
-		attackright3 = setup("/player/LarceyPunchRight3", gp.tileSize * 2, gp.tileSize);
-		attackright4 = setup("/player/LarceyPunchRight4", gp.tileSize * 2, gp.tileSize);
-		attackright5 = setup("/player/LarceyPunchRight5", gp.tileSize * 2, gp.tileSize);
-		//up
-		attackup1 = setup("/player/LarceyPunchUp1", gp.tileSize , gp.tileSize * 2);
-		attackup2 = setup("/player/LarceyPunchUp2", gp.tileSize , gp.tileSize * 2);
-		attackup3 = setup("/player/LarceyPunchUp3", gp.tileSize , gp.tileSize * 2);
-		attackup4 = setup("/player/LarceyPunchUp4", gp.tileSize , gp.tileSize * 2);
-		attackup5 = setup("/player/LarceyPunchUp5", gp.tileSize , gp.tileSize * 2);
+		if(currentWeapon.type == type_punch) {
+			//down
+			attackdown1 = setup("/player/LarceyPunchDown1", gp.tileSize , gp.tileSize * 2);
+			attackdown2 = setup("/player/LarceyPunchDown2", gp.tileSize , gp.tileSize * 2);
+			attackdown3 = setup("/player/LarceyPunchDown3", gp.tileSize , gp.tileSize * 2);
+			attackdown4 = setup("/player/LarceyPunchDown4", gp.tileSize , gp.tileSize * 2);
+			attackdown5 = setup("/player/LarceyPunchDown5", gp.tileSize , gp.tileSize * 2);
+			//left
+			attackleft1 = setup("/player/LarceyPunchLeft1", gp.tileSize * 2, gp.tileSize);
+			attackleft2 = setup("/player/LarceyPunchLeft2", gp.tileSize * 2, gp.tileSize);
+			attackleft3 = setup("/player/LarceyPunchLeft3", gp.tileSize * 2, gp.tileSize);
+			attackleft4 = setup("/player/LarceyPunchLeft4", gp.tileSize * 2, gp.tileSize);
+			attackleft5 = setup("/player/LarceyPunchLeft5", gp.tileSize * 2, gp.tileSize);
+			//right
+			attackright1 = setup("/player/LarceyPunchRight1", gp.tileSize * 2, gp.tileSize);
+			attackright2 = setup("/player/LarceyPunchRight2", gp.tileSize * 2, gp.tileSize);
+			attackright3 = setup("/player/LarceyPunchRight3", gp.tileSize * 2, gp.tileSize);
+			attackright4 = setup("/player/LarceyPunchRight4", gp.tileSize * 2, gp.tileSize);
+			attackright5 = setup("/player/LarceyPunchRight5", gp.tileSize * 2, gp.tileSize);
+			//up
+			attackup1 = setup("/player/LarceyPunchUp1", gp.tileSize , gp.tileSize * 2);
+			attackup2 = setup("/player/LarceyPunchUp2", gp.tileSize , gp.tileSize * 2);
+			attackup3 = setup("/player/LarceyPunchUp3", gp.tileSize , gp.tileSize * 2);
+			attackup4 = setup("/player/LarceyPunchUp4", gp.tileSize , gp.tileSize * 2);
+			attackup5 = setup("/player/LarceyPunchUp5", gp.tileSize , gp.tileSize * 2);
+		}
+		else if(currentWeapon.type == type_gun) {
+			//down
+			attackdown1 = setup("/player/LarceyShootDown1", gp.tileSize , gp.tileSize * 2);
+			attackdown2 = setup("/player/LarceyShootDown2", gp.tileSize , gp.tileSize * 2);
+			attackdown3 = setup("/player/LarceyShootDown3", gp.tileSize , gp.tileSize * 2);
+			attackdown4 = setup("/player/LarceyShootDown4", gp.tileSize , gp.tileSize * 2);
+			attackdown5 = setup("/player/LarceyShootDown5", gp.tileSize , gp.tileSize * 2);
+			//left
+			attackleft1 = setup("/player/LarceyShootLeft1", gp.tileSize * 2, gp.tileSize);
+			attackleft2 = setup("/player/LarceyShootLeft2", gp.tileSize * 2, gp.tileSize);
+			attackleft3 = setup("/player/LarceyShootLeft3", gp.tileSize * 2, gp.tileSize);
+			attackleft4 = setup("/player/LarceyShootLeft4", gp.tileSize * 2, gp.tileSize);
+			attackleft5 = setup("/player/LarceyShootLeft5", gp.tileSize * 2, gp.tileSize);
+			//right
+			attackright1 = setup("/player/LarceyShootRight1", gp.tileSize * 2, gp.tileSize);
+			attackright2 = setup("/player/LarceyShootRight2", gp.tileSize * 2, gp.tileSize);
+			attackright3 = setup("/player/LarceyShootRight3", gp.tileSize * 2, gp.tileSize);
+			attackright4 = setup("/player/LarceyShootRight4", gp.tileSize * 2, gp.tileSize);
+			attackright5 = setup("/player/LarceyShootRight5", gp.tileSize * 2, gp.tileSize);
+			//up
+			attackup1 = setup("/player/LarceyShootUp1", gp.tileSize , gp.tileSize * 2);
+			attackup2 = setup("/player/LarceyShootUp2", gp.tileSize , gp.tileSize * 2);
+			attackup3 = setup("/player/LarceyShootUp3", gp.tileSize , gp.tileSize * 2);
+			attackup4 = setup("/player/LarceyShootUp4", gp.tileSize , gp.tileSize * 2);
+			attackup5 = setup("/player/LarceyShootUp5", gp.tileSize , gp.tileSize * 2);
+		}
+		
 	}
 	public void update() {
 		if(attacking == true) {
@@ -514,7 +550,10 @@ public class Player extends Entity{
 		if(i != 999) {
 			
 			if(gp.monster[i].invincible == false) {
-				gp.monster[i].life -= 1;
+				gp.monster[i].life -= playerAttack;
+				if(gp.monster[i].life  < 0) {
+					gp.monster[i].life = 0;
+				}
 				gp.monster[i].invincible = true;
 				gp.monster[i].damageReaction();
 				
@@ -605,8 +644,17 @@ public class Player extends Entity{
 			
 			Entity selectedItem = inventory.get(itemIndex);
 			
-			if(selectedItem.type == type_weapon) {
-				currentWeapon = selectedItem;
+			if(selectedItem.type == type_gun) {
+				
+				if(selectedItem.type != currentWeapon.type) {
+					currentWeapon = selectedItem;
+					getPlayerAttackImage();
+					setAttack();
+				}else {
+					currentWeapon = Punch;
+					getPlayerAttackImage();
+					setAttack();
+				}
 				
 			}
 			if(selectedItem.type == type_consumable) {

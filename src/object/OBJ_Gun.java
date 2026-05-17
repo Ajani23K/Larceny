@@ -12,6 +12,7 @@ public OBJ_Gun(GamePanel gp) {
 		down1 = setup("/objects/GunObject");
 		description = "[" + name + "]\nYour trusty weapon.";
 		pickable = true;
-		type = type_weapon;
+		type = type_gun;
+		attackValue = 3;
 	}
 }

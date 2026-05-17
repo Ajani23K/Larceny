@@ -70,6 +70,7 @@ public class Entity {
 	public int height;
 	public String bodyType;
 	public String playerPassive;
+	public int playerAttack;
 	
 	public int money;
 	public Entity currentWeapon;
@@ -84,8 +85,9 @@ public class Entity {
 	public final int type_player = 0;
 	public final int type_npc = 1;
 	public final int type_monster = 2;
-	public final int type_weapon = 3;
-	public final int type_consumable = 4;
+	public final int type_gun = 3;
+	public final int type_punch = 4;
+	public final int type_consumable = 5;
 	public int healvalue = 1;
 	
 	public Entity(GamePanel gp) {
@@ -207,8 +209,9 @@ public class Entity {
 			
 			//Display monster health
 			if(monster == true && hpBarOn == true) {
-				double oneScale = (double)gp.tileSize/maxLife;
+				double oneScale = (double)gp.tileSize/maxLife;	
 				double hpBarValue = oneScale*life;
+				
 				
 				g2.setColor(new Color(0,0,0));
 				g2.fillRect(screenX-1, screenY-16, gp.tileSize+2, 12);
