@@ -6,10 +6,10 @@ import entity.Entity;
 import main.GamePanel;
 
 public class MON_Police extends Entity{
-
+	GamePanel gp;
 	public MON_Police(GamePanel gp) {
 		super(gp);
-		
+		this.gp = gp;
 		type = type_monster;
 		name = "Police";
 		monster = true;
@@ -36,6 +36,7 @@ public class MON_Police extends Entity{
 	}
 	public void setAction() {
 		actionLockCounter++; 
+		
 		Random random = new Random();
 		if(actionLockCounter == 120) {
 		int i = random.nextInt(100) + 1; //picks number from 1 to 100

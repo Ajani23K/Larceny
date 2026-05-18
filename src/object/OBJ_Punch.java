@@ -11,5 +11,7 @@ public OBJ_Punch(GamePanel gp) {
 		name = "Punch";
 		type = type_punch;
 		attackValue = 1;
+		attackArea.height = 32;
+		attackArea.width = 32;
 	}
 }

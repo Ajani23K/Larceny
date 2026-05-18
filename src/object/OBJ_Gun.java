@@ -14,5 +14,7 @@ public OBJ_Gun(GamePanel gp) {
 		pickable = true;
 		type = type_gun;
 		attackValue = 3;
+		attackArea.height = 48;
+		attackArea.width = 48;
 	}
 }

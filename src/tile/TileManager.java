@@ -43,11 +43,11 @@ public class TileManager {
 
 			System.out.println("reading tile images");
 			
-			setup(0, "BuildingWIP", true);
+			setup(0, "Building1", true);
 			
-			setup(1, "SideWalkWIP", false);
+			setup(1, "SideWalk", false);
 	
-			setup(2, "StreetTileWIP", false);
+			setup(2, "Street", false);
 			
 			setup(3, "GrassTileWIP", false);
 

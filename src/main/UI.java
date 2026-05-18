@@ -38,6 +38,7 @@ public class UI {
 	public void showMessage(String text) {
 		
 		message = text;
+		messageCounter = 0;
 		messageOn = true;
 	}
 	public void draw(Graphics2D g2) {
@@ -71,6 +72,7 @@ public class UI {
 		}
 		//Message
 		if(messageOn == true) {
+			System.out.println(message);
 			g2.setFont(g2.getFont().deriveFont(30F));
 			g2.drawString(message, 400, 60);
 			

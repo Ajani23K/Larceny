@@ -55,8 +55,7 @@ public class Player extends Entity{
 		solidAreaDefaultY = solidArea.y; //record default values because they will change later
 	
 	
-		attackArea.width = 36;
-		attackArea.height = 36;
+		
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
@@ -224,14 +223,14 @@ public class Player extends Entity{
 		int solidAreaHeight = solidArea.height;
 		//adjust players worldx/y for attack area
 		switch(direction) {
-		case "up": worldY -= attackArea.height; break;
-		case "down": worldY += attackArea.height; break;
-		case "left": worldX -= attackArea.height; break;
-		case "right": worldX += attackArea.height; break;
+		case "up": worldY -= currentWeapon.attackArea.height; break;
+		case "down": worldY += currentWeapon.attackArea.height; break;
+		case "left": worldX -= currentWeapon.attackArea.width; break;
+		case "right": worldX += currentWeapon.attackArea.width; break;
 		}
 		//attackArea becomes solidArea
-		solidArea.width = attackArea.width;
-		solidArea.height = attackArea.height;
+		solidArea.width = currentWeapon.attackArea.width;
+		solidArea.height = currentWeapon.attackArea.height;
 		//check Monster collision with updated worldX and Y
 		
 		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
@@ -519,7 +518,9 @@ public class Player extends Entity{
 			}else {
 				text = "Your bag is full!";
 			}
+			if(text.length() > 0) {
 			gp.ui.showMessage(text);
+			}
 		}
 	}
 	public void interactNPC(int i) {
@@ -584,7 +585,7 @@ public class Player extends Entity{
 		
 		if(i != 999) {
 			String objectname = gp.obj[i].name;
-			if(objectname == "Door") {
+			if(objectname.equals("Door")) {
 			
 				
 				if(inStore == false) {

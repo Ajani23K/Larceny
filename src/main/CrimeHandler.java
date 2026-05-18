@@ -6,7 +6,7 @@ import entity.Entity;
 
 public class CrimeHandler {
 	GamePanel gp;
-	int crimerating = 0;
+	public int crimerating = 0;
 	public ArrayList<Entity> savedInventory = new ArrayList<>();
 	public ArrayList<String> crimesCommited = new ArrayList<>();
 	
@@ -33,13 +33,17 @@ public class CrimeHandler {
 		}
 	}
 	public void checkStealing(ArrayList<Entity> inventory) {
+		String text = "";
+		System.out.println("saved inventory size: "+savedInventory.size() +" player inventory size: "+inventory.size());
 		if(savedInventory.size() < inventory.size()) {
 			increaseCR();
 			crimesCommited.add("Stealing");
-			gp.ui.showMessage("You have been caught stealing");
+			text = "You have been caught stealing";
 			System.out.println("You have been caught stealing");
+			gp.ui.showMessage(text);
 		}
 		clearSavedInventory();
+		
 	}
 
 }
