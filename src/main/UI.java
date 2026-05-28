@@ -23,6 +23,8 @@ public class UI {
 	BufferedImage heart_full, heart_half, heart_blank;
 	public int slotCol = 0;
 	public int slotRow = 0;
+	public int dslotCol = 0;
+	
 	
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -64,6 +66,7 @@ public class UI {
 		if(gp.gameState == gp.dialogueState) {
 			drawPlayerLife();
 			drawDialogueScreen();
+			drawYesOrNo();
 		}
 		if(gp.gameState == gp.characterState) {
 			drawPlayerLife();
@@ -83,6 +86,45 @@ public class UI {
 				messageOn = false;
 			}
 		}
+	}
+	public void drawYesOrNo() {
+		
+		//first window
+		int yesX = gp.tileSize*2;
+		int yesY = gp.tileSize*5;
+		int width = gp.tileSize*3;
+		int height = (int)(gp.tileSize*1.5);
+		
+		drawSubWindow(yesX,yesY,width,height);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+		int textX = yesX + gp.tileSize;
+		int textY = yesY + 40;
+		g2.drawString("Yes", textX, textY);
+		
+		//draw second window
+		int NoX = yesX + gp.tileSize*4;
+		int NoY = yesY;
+		
+		drawSubWindow(NoX, NoY, width, height);
+		
+		g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 20F));
+		textX = NoX + 55;
+		textY = NoY + 40;
+		g2.drawString("No", textX, textY);
+		
+		//draw player cursor
+		
+		//CURSOR
+				int cursorX = yesX + 13 +(dslotCol * (4*gp.tileSize));
+				int cursorY = yesY + 13;
+				int cursorWidth = width - 25;
+				int cursorHeight = height - 25;
+				
+				// DRAW CURSOR
+				g2.setColor(Color.white);
+				g2.setStroke(new BasicStroke(2));
+				g2.drawRoundRect(cursorX, cursorY, cursorWidth, cursorHeight, 10, 10);
 	}
 	public void drawInventory() {
 		

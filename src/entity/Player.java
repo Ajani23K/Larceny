@@ -511,6 +511,9 @@ public class Player extends Entity{
 			String objectName = gp.obj[i].name;
 			if(inventory.size() != maxInventorySize) {
 				if(gp.obj[i].pickable) {
+					if(inStore) {
+						gp.crimeHandler.addObject(gp.obj[i]);
+					}
 				inventory.add(gp.obj[i]);
 				removeObject(i);
 				text = "You picked up a " + objectName + ".";
@@ -612,6 +615,7 @@ public class Player extends Entity{
 				else {	
 					if(System.nanoTime() - startTime >= cooldownTime) {
 					gp.crimeHandler.checkStealing(inventory);
+					gp.crimeHandler.clearObject();
 					setPlayerExitLocation();
 					inStore = false;
 					aSetter.moveNPC(0);
@@ -663,6 +667,13 @@ public class Player extends Entity{
 				selectedItem.use(this);
 				inventory.remove(itemIndex);
 			}
+		}
+	}
+	public void selectDialogue() {
+		if(gp.ui.dslotCol == 0) {
+			//response yes
+		}else {
+			//response no
 		}
 	}
 }

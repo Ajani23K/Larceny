@@ -9,7 +9,7 @@ public class CrimeHandler {
 	public int crimerating = 0;
 	public ArrayList<Entity> savedInventory = new ArrayList<>();
 	public ArrayList<String> crimesCommited = new ArrayList<>();
-	
+	public ArrayList<Entity> savedObjects = new ArrayList<>();
 	public CrimeHandler(GamePanel gp) {
 		this.gp = gp;
 		
@@ -44,6 +44,15 @@ public class CrimeHandler {
 		}
 		clearSavedInventory();
 		
+	}
+	public void addObject(Entity entity) {
+		savedObjects.add(entity);
+	}
+	public void clearObject() {
+		savedObjects.clear();
+	}
+	public ArrayList<Entity> sendObjects() {
+		return savedObjects;
 	}
 
 }
