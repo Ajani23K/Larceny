@@ -7,6 +7,7 @@ import main.GamePanel;
 
 public class OBJ_CounterMiddle extends Entity{
 	GamePanel gp;
+	int price = 0;
 	public OBJ_CounterMiddle(GamePanel gp) {
 		
 		super(gp);
@@ -19,6 +20,7 @@ public class OBJ_CounterMiddle extends Entity{
 		
 		collision = true;
 		talkative = true;
+		waitingforresponse = true;
 		setDialogue();
 	}
 	public void setDialogue() {
@@ -30,7 +32,8 @@ public class OBJ_CounterMiddle extends Entity{
 		
 	}
 	public void checkPrice() {
-		int price = 0;
+		waitingforresponse = true;
+		price = 0;
 		ArrayList<Entity> items = new ArrayList<Entity>(gp.crimeHandler.sendObjects());
 		for(int i = 0; i < items.size(); i++) {
 			Entity Item = items.get(i);
@@ -40,5 +43,31 @@ public class OBJ_CounterMiddle extends Entity{
 			}
 		}
 		dialogues[0] = "That will be $"+price;
+	}
+	public void response(boolean response) {
+		waitingforresponse = false;
+		if(response) {
+		
+		int money = gp.player.checkMoney();
+		if(price <= money) {
+			gp.player.consumeMoney(price);
+			gp.ui.currentDialogue = "Thanks for the purchase!";
+			gp.crimeHandler.saveInventory(gp.player.inventory);
+			gp.crimeHandler.clearObject();
+			
+		}else {
+			System.out.println("else called");
+			gp.ui.currentDialogue = "You dont have enough money!";
+			
+			
+			
+		}
+	}else {
+		gp.ui.currentDialogue = "Okay, be sure to return whatever you didn't buy back on the shelf.";
+		
+	
+	}
+		gp.gameState = gp.dialogueState;
+		
 	}
 }

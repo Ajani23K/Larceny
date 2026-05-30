@@ -24,6 +24,7 @@ public class UI {
 	public int slotCol = 0;
 	public int slotRow = 0;
 	public int dslotCol = 0;
+	public boolean yesOrNo = false;
 	
 	
 	public UI(GamePanel gp) {
@@ -66,7 +67,10 @@ public class UI {
 		if(gp.gameState == gp.dialogueState) {
 			drawPlayerLife();
 			drawDialogueScreen();
+			if(gp.player.lasttalked != null && gp.player.lasttalked.waitingforresponse) {
 			drawYesOrNo();
+			yesOrNo = true;
+		}
 		}
 		if(gp.gameState == gp.characterState) {
 			drawPlayerLife();
@@ -75,7 +79,7 @@ public class UI {
 		}
 		//Message
 		if(messageOn == true) {
-			System.out.println(message);
+			
 			g2.setFont(g2.getFont().deriveFont(30F));
 			g2.drawString(message, 400, 60);
 			

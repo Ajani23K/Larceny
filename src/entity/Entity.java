@@ -89,7 +89,7 @@ public class Entity {
 	public final int type_punch = 4;
 	public final int type_consumable = 5;
 	public int healvalue = 1;
-	
+	public boolean waitingforresponse = false;
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
@@ -103,6 +103,7 @@ public class Entity {
 		
 	}
 	public void speak() {
+		
 		gp.ui.currentDialogue = dialogues[dialogueIndex];
 		if(dialogues[dialogueIndex+1] != null) {
 		dialogueIndex++;
@@ -125,6 +126,9 @@ public class Entity {
 			break;
 		
 		}
+	}
+	public void response(boolean b) {
+		
 	}
 	public void update() {
 		
@@ -324,5 +328,6 @@ public class Entity {
 	public String getPlayerDirection() {
 		return gp.player.direction;
 	}
+	
 	
 }

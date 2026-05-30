@@ -174,8 +174,13 @@ public class KeyHandler implements KeyListener, MouseListener{
 	}
 	public void dialogueState(int code) {
 		if(code == KeyEvent.VK_SPACE) {
-			gp.player.selectDialogue();
-			gp.gameState = gp.playState;
+			if(gp.ui.yesOrNo == true) {
+				gp.player.selectDialogue();
+				gp.ui.yesOrNo = false;
+				
+			}else {
+				gp.gameState = gp.playState;
+			}
 		}if(code == KeyEvent.VK_A) {
 			if(gp.ui.dslotCol != 0) {
 			gp.ui.dslotCol--;

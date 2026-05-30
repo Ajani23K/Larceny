@@ -34,6 +34,7 @@ public class Player extends Entity{
 	public boolean inStore = false;
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public final int maxInventorySize = 20;
+	public Entity lasttalked;
 	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
@@ -88,6 +89,9 @@ public class Player extends Entity{
 	public void setItems() {
 		
 		inventory.add(new OBJ_Soda(gp));
+		inventory.add(new OBJ_Dollar(gp));
+		inventory.add(new OBJ_Dollar(gp));
+		inventory.add(new OBJ_Dollar(gp));
 		inventory.add(new OBJ_Dollar(gp));
 			}
 	public void getPlayerImage(){
@@ -636,6 +640,7 @@ public class Player extends Entity{
 					if(keyH.ePressed == true) {
 						gp.gameState = gp.dialogueState;
 						gp.obj[i].speak();
+						lasttalked = gp.obj[i];
 					}
 				}
 			}
@@ -671,9 +676,40 @@ public class Player extends Entity{
 	}
 	public void selectDialogue() {
 		if(gp.ui.dslotCol == 0) {
+			
+			System.out.println(lasttalked.name);
 			//response yes
+			if(lasttalked != null) {
+				lasttalked.response(true);
+			}
 		}else {
 			//response no
+			if(lasttalked != null) {
+				lasttalked.response(false);
+			}
 		}
 	}
+	public int checkMoney() {
+		int money = 0;
+		for(int i = 0; i < inventory.size(); i++) {
+			Entity item = inventory.get(i);
+			if(item.name.equals("Dollar")) {
+				money++;
+			}
+		}
+		return money;
+	}
+	public void consumeMoney(int amount) {
+		for(int t = 0; t < inventory.size() && amount > 0; t++) {
+			Entity item = inventory.get(t);
+		
+			if(item != null && "Dollar".equals(item.name)) {
+				inventory.remove(t);
+				t--;
+				amount--;
+			}
+			
+		}
+	}
+	
 }
