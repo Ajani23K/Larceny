@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class KeyHandler implements KeyListener, MouseListener{
 
-	public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed, rPressed, m1Pressed;
+	public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed, rPressed, m1Pressed, shotKeyPressed;
 	GamePanel gp;
 	boolean checkDrawTime = false;
 	public boolean showGridLocation = false;
@@ -108,6 +108,9 @@ public class KeyHandler implements KeyListener, MouseListener{
 				if(gp.gameState == gp.playState) {
 					gp.gameState = gp.characterState;
 				}
+			}
+			if(code == KeyEvent.VK_F) {
+				shotKeyPressed = true;
 			}
 		
 		//DEBUG
@@ -215,6 +218,9 @@ public class KeyHandler implements KeyListener, MouseListener{
 		}
 		if(code == KeyEvent.VK_R) {
 			rPressed = false;
+		}
+		if(code == KeyEvent.VK_F) {
+			shotKeyPressed = false;
 		}
 		
 	}

@@ -56,7 +56,7 @@ public class OBJ_CounterMiddle extends Entity{
 			gp.crimeHandler.clearObject();
 			
 		}else {
-			System.out.println("else called");
+			
 			gp.ui.currentDialogue = "You dont have enough money!";
 			
 			

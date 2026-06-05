@@ -15,6 +15,7 @@ import main.GamePanel;
 import main.KeyHandler;
 import main.UtilityTool;
 import map.SuperMap;
+import object.OBJ_Bullet;
 import object.OBJ_Dollar;
 import object.OBJ_Punch;
 import object.OBJ_Soda;
@@ -35,6 +36,7 @@ public class Player extends Entity{
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public final int maxInventorySize = 20;
 	public Entity lasttalked;
+	public double weaponCooldown;
 	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
@@ -80,7 +82,9 @@ public class Player extends Entity{
 		money = 0;
 		Punch = new OBJ_Punch(gp);
 		currentWeapon = Punch;
+		projectile = new OBJ_Bullet(gp);
 		setAttack();
+		
 		
 	}
 	public void setAttack() {
@@ -125,6 +129,11 @@ public class Player extends Entity{
 
 		
 	}
+	public void setProjectile() {
+		if(currentWeapon.type == type_gun) {
+			projectile = new OBJ_Bullet(gp);
+		}
+	}
 	public void getPlayerAttackImage() {
 		if(currentWeapon.type == type_punch) {
 			//down
@@ -153,6 +162,7 @@ public class Player extends Entity{
 			attackup5 = setup("/player/LarceyPunchUp5", gp.tileSize , gp.tileSize * 2);
 		}
 		else if(currentWeapon.type == type_gun) {
+			
 			//down
 			attackdown1 = setup("/player/LarceyShootDown1", gp.tileSize , gp.tileSize * 2);
 			attackdown2 = setup("/player/LarceyShootDown2", gp.tileSize , gp.tileSize * 2);
@@ -238,7 +248,7 @@ public class Player extends Entity{
 		//check Monster collision with updated worldX and Y
 		
 		int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-		damageMonster(monsterIndex);
+		damageMonster(monsterIndex, playerAttack);
 		
 		worldX = currentWorldX;
 		worldY = currentWorldY;
@@ -499,6 +509,17 @@ public class Player extends Entity{
 		}
 		}
 		
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && currentWeapon.type == type_gun) {
+			//if(projectile.alive == false) {
+			// Set default coords, direction, user, alive 
+			attacking = true;
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			gp.projectileList.add(projectile);
+			shotAvailableCounter = 0;
+			//}
+		}
+		
 		if(invincible) {
 			invincibleCounter++;
 			if(invincibleCounter> 60) {
@@ -506,7 +527,9 @@ public class Player extends Entity{
 				invincibleCounter = 0;
 			}
 		}
-		
+		if(shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
 	}
 	public void pickUpObject(int i) {
 		
@@ -536,6 +559,7 @@ public class Player extends Entity{
 			attacking = true;
 		}
 		
+		
 		if(i != 999) {
 			if(keyH.ePressed == true) {
 			gp.gameState = gp.dialogueState;
@@ -547,18 +571,18 @@ public class Player extends Entity{
 	public void contactMonster(int i) {
 		if(i != 999) {
 			
-			if(invincible == false) {
+			if(invincible == false && gp.monster[i].dying == false) {
 			life -= 1;
 			invincible = true;
 			}
 		}
 		
 	}
-	public void damageMonster(int i) {
+	public void damageMonster(int i, int attack) {
 		if(i != 999) {
 			
 			if(gp.monster[i].invincible == false) {
-				gp.monster[i].life -= playerAttack;
+				gp.monster[i].life -= attack;
 				if(gp.monster[i].life  < 0) {
 					gp.monster[i].life = 0;
 				}
@@ -657,6 +681,7 @@ public class Player extends Entity{
 			if(selectedItem.type == type_gun) {
 				
 				if(selectedItem.type != currentWeapon.type) {
+					
 					currentWeapon = selectedItem;
 					getPlayerAttackImage();
 					setAttack();
