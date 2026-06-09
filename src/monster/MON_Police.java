@@ -4,6 +4,7 @@ import java.util.Random;
 
 import entity.Entity;
 import main.GamePanel;
+import object.OBJ_Bullet;
 
 public class MON_Police extends Entity{
 	GamePanel gp;
@@ -16,6 +17,7 @@ public class MON_Police extends Entity{
 		speed = 2;
 		maxLife = 3;
 		life = maxLife;
+		projectile = new OBJ_Bullet(gp);
 		
 		solidArea.x = 8;
 		solidArea.y = 2;
@@ -54,6 +56,13 @@ public class MON_Police extends Entity{
 			direction = "right";
 		}
 		actionLockCounter = 0;
+		}
+		
+		int i = new Random().nextInt(100)+1;
+		if(i > 99 && projectile.alive == false && shotAvailableCounter == 30) {
+			projectile.set(worldX, worldY, direction, true, this);
+			gp.projectileList.add(projectile);
+			shotAvailableCounter = 0;
 		}
 		
 	}

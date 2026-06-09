@@ -77,6 +77,8 @@ public class Player extends Entity{
 		height = 4;
 		bodyType = "Slim";
 		playerPassive = "None";
+		maxAmmo = 4;
+		ammo = maxAmmo;
 		maxLife = 6;
 		life = maxLife;
 		money = 0;
@@ -509,16 +511,7 @@ public class Player extends Entity{
 		}
 		}
 		
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && currentWeapon.type == type_gun) {
-			//if(projectile.alive == false) {
-			// Set default coords, direction, user, alive 
-			attacking = true;
-			projectile.set(worldX, worldY, direction, true, this);
-			
-			gp.projectileList.add(projectile);
-			shotAvailableCounter = 0;
-			//}
-		}
+		 HandleShooting();
 		
 		if(invincible) {
 			invincibleCounter++;
@@ -527,10 +520,28 @@ public class Player extends Entity{
 				invincibleCounter = 0;
 			}
 		}
+		
+	}
+	public void HandleShooting() {
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && currentWeapon.type == type_gun) {
+			//if(projectile.alive == false) {
+			// Set default coords, direction, user, alive 
+			attacking = true;
+			projectile.set(worldX, worldY, direction, true, this);
+			
+			gp.projectileList.add(projectile);
+			shotAvailableCounter = 0;
+			ammo--;
+			if(ammo < 0) {
+				ammo = maxAmmo;
+			}
+			//}
+		}
 		if(shotAvailableCounter < 30) {
 			shotAvailableCounter++;
 		}
 	}
+	
 	public void pickUpObject(int i) {
 		
 		if(i != 999) {

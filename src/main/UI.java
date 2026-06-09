@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import object.OBJ_Heart;
+import object.OBJ_Chamber;
 import object.OBJ_Dollar;
 import entity.Entity;
 
@@ -25,7 +26,7 @@ public class UI {
 	public int slotRow = 0;
 	public int dslotCol = 0;
 	public boolean yesOrNo = false;
-	
+	BufferedImage chamberEmpty, one_bullet, two_bullet, three_bullet, four_bullet;
 	
 	public UI(GamePanel gp) {
 		this.gp = gp;
@@ -36,6 +37,16 @@ public class UI {
 		heart_full = heart.image;
 		heart_half = heart.image2;
 		heart_blank = heart.image3;
+		
+		Entity chamber = new OBJ_Chamber(gp);
+		chamberEmpty = chamber.image;
+		one_bullet = chamber.image2;
+		two_bullet = chamber.image3;
+		three_bullet = chamber.image4;
+		four_bullet = chamber.image5;
+		
+		
+		
 		
 	}
 	public void showMessage(String text) {
@@ -57,15 +68,18 @@ public class UI {
 		if(gp.gameState == gp.playState) {
 			//Do playState stuff later
 			 drawPlayerLife();
+			 drawPlayerAmmo();
 		}
 		//pauseState
 		if(gp.gameState == gp.pauseState) {
 			 drawPlayerLife();
+			 drawPlayerAmmo();
 			 drawPausedScreen();
 		}
 		//dialogueState
 		if(gp.gameState == gp.dialogueState) {
 			drawPlayerLife();
+			drawPlayerAmmo();
 			drawDialogueScreen();
 			if(gp.player.lasttalked != null && gp.player.lasttalked.waitingforresponse) {
 			drawYesOrNo();
@@ -74,6 +88,7 @@ public class UI {
 		}
 		if(gp.gameState == gp.characterState) {
 			drawPlayerLife();
+			drawPlayerAmmo();
 			drawCharacterScreen();
 			drawInventory();
 		}
@@ -265,6 +280,34 @@ public class UI {
 		
 		
 		
+	}
+	public void drawPlayerAmmo() {
+		if(gp.player.currentWeapon.type == gp.player.type_gun) {
+		int x = gp.ScreenWidth - gp.tileSize*4;
+		int y = gp.ScreenHeight - gp.tileSize*4;
+		//Draw Max Ammo
+		g2.drawImage(four_bullet, x, y, null);
+		
+		//Switch image based on player ammo
+		switch(gp.player.ammo) {
+		case 0:
+			g2.drawImage(chamberEmpty, x, y, null);
+		break;
+		case 1:
+			g2.drawImage(one_bullet, x, y, null);
+			break;
+		case 2:
+			g2.drawImage(two_bullet, x, y, null);
+			break;
+		case 3:
+			g2.drawImage(three_bullet, x, y, null);
+			break;
+		case 4:
+			g2.drawImage(four_bullet, x, y, null);
+			break;
+			
+		}
+		}
 	}
 	public void drawPlayerLife() {
 		

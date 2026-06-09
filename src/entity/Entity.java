@@ -43,7 +43,7 @@ public class Entity {
 	public boolean monster = false;
 	public int actionLockCounter = 0;
 	
-	public BufferedImage image, image2, image3;
+	public BufferedImage image, image2, image3, image4, image5;
 	public String name;
 	public boolean collision = false;
 	
@@ -148,10 +148,7 @@ public class Entity {
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 		
 		if(this.type == type_monster && contactPlayer == true) {
-			if(gp.player.invincible == false) {
-				gp.player.life -= 1;
-				gp.player.invincible = true;
-			}
+			damagePlayer(attackValue);
 		}
 		if(collisionOn == false) {
 			
@@ -176,6 +173,15 @@ public class Entity {
 				invincible = false;
 				invincibleCounter = 0;
 			}
+		}
+		if(shotAvailableCounter < 30) {
+			shotAvailableCounter++;
+		}
+	}
+	public void damagePlayer(int attack) {
+		if(gp.player.invincible == false) {
+			gp.player.life -= 1;
+			gp.player.invincible = true;
 		}
 	}
 	public void draw(Graphics2D g2) {
