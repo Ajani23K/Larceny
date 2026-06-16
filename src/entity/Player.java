@@ -62,6 +62,7 @@ public class Player extends Entity{
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
+		getPlayerShootImage();
 		setItems();
 	}
 	public void setDefaultValues() {
@@ -166,34 +167,65 @@ public class Player extends Entity{
 		else if(currentWeapon.type == type_gun) {
 			
 			//down
-			attackdown1 = setup("/player/LarceyShootDown1", gp.tileSize , gp.tileSize * 2);
-			attackdown2 = setup("/player/LarceyShootDown2", gp.tileSize , gp.tileSize * 2);
-			attackdown3 = setup("/player/LarceyShootDown3", gp.tileSize , gp.tileSize * 2);
-			attackdown4 = setup("/player/LarceyShootDown4", gp.tileSize , gp.tileSize * 2);
-			attackdown5 = setup("/player/LarceyShootDown5", gp.tileSize , gp.tileSize * 2);
+			attackdown1 = setup("/player/LarceyPunchDown1", gp.tileSize , gp.tileSize * 2);
+			attackdown2 = setup("/player/LarceyPunchDown2", gp.tileSize , gp.tileSize * 2);
+			attackdown3 = setup("/player/LarceyPunchDown3", gp.tileSize , gp.tileSize * 2);
+			attackdown4 = setup("/player/LarceyPunchDown4", gp.tileSize , gp.tileSize * 2);
+			attackdown5 = setup("/player/LarceyPunchDown5", gp.tileSize , gp.tileSize * 2);
 			//left
-			attackleft1 = setup("/player/LarceyShootLeft1", gp.tileSize * 2, gp.tileSize);
-			attackleft2 = setup("/player/LarceyShootLeft2", gp.tileSize * 2, gp.tileSize);
-			attackleft3 = setup("/player/LarceyShootLeft3", gp.tileSize * 2, gp.tileSize);
-			attackleft4 = setup("/player/LarceyShootLeft4", gp.tileSize * 2, gp.tileSize);
-			attackleft5 = setup("/player/LarceyShootLeft5", gp.tileSize * 2, gp.tileSize);
+			attackleft1 = setup("/player/LarceyPunchLeft1", gp.tileSize * 2, gp.tileSize);
+			attackleft2 = setup("/player/LarceyPunchLeft2", gp.tileSize * 2, gp.tileSize);
+			attackleft3 = setup("/player/LarceyPunchLeft3", gp.tileSize * 2, gp.tileSize);
+			attackleft4 = setup("/player/LarceyPunchLeft4", gp.tileSize * 2, gp.tileSize);
+			attackleft5 = setup("/player/LarceyPunchLeft5", gp.tileSize * 2, gp.tileSize);
 			//right
-			attackright1 = setup("/player/LarceyShootRight1", gp.tileSize * 2, gp.tileSize);
-			attackright2 = setup("/player/LarceyShootRight2", gp.tileSize * 2, gp.tileSize);
-			attackright3 = setup("/player/LarceyShootRight3", gp.tileSize * 2, gp.tileSize);
-			attackright4 = setup("/player/LarceyShootRight4", gp.tileSize * 2, gp.tileSize);
-			attackright5 = setup("/player/LarceyShootRight5", gp.tileSize * 2, gp.tileSize);
+			attackright1 = setup("/player/LarceyPunchRight1", gp.tileSize * 2, gp.tileSize);
+			attackright2 = setup("/player/LarceyPunchRight2", gp.tileSize * 2, gp.tileSize);
+			attackright3 = setup("/player/LarceyPunchRight3", gp.tileSize * 2, gp.tileSize);
+			attackright4 = setup("/player/LarceyPunchRight4", gp.tileSize * 2, gp.tileSize);
+			attackright5 = setup("/player/LarceyPunchRight5", gp.tileSize * 2, gp.tileSize);
 			//up
-			attackup1 = setup("/player/LarceyShootUp1", gp.tileSize , gp.tileSize * 2);
-			attackup2 = setup("/player/LarceyShootUp2", gp.tileSize , gp.tileSize * 2);
-			attackup3 = setup("/player/LarceyShootUp3", gp.tileSize , gp.tileSize * 2);
-			attackup4 = setup("/player/LarceyShootUp4", gp.tileSize , gp.tileSize * 2);
-			attackup5 = setup("/player/LarceyShootUp5", gp.tileSize , gp.tileSize * 2);
+			attackup1 = setup("/player/LarceyPunchUp1", gp.tileSize , gp.tileSize * 2);
+			attackup2 = setup("/player/LarceyPunchUp2", gp.tileSize , gp.tileSize * 2);
+			attackup3 = setup("/player/LarceyPunchUp3", gp.tileSize , gp.tileSize * 2);
+			attackup4 = setup("/player/LarceyPunchUp4", gp.tileSize , gp.tileSize * 2);
+			attackup5 = setup("/player/LarceyPunchUp5", gp.tileSize , gp.tileSize * 2);
 		}
 		
 	}
+	public void getPlayerShootImage() {
+		
+		if(currentWeapon.type == type_gun) {
+			
+			//down
+			shootdown1 = setup("/player/LarceyShootDown1", gp.tileSize , gp.tileSize * 2);
+			shootdown2 = setup("/player/LarceyShootDown2", gp.tileSize , gp.tileSize * 2);
+			shootdown3 = setup("/player/LarceyShootDown3", gp.tileSize , gp.tileSize * 2);
+			shootdown4 = setup("/player/LarceyShootDown4", gp.tileSize , gp.tileSize * 2);
+			shootdown5 = setup("/player/LarceyShootDown5", gp.tileSize , gp.tileSize * 2);
+			//left
+			shootleft1 = setup("/player/LarceyShootLeft1", gp.tileSize * 2, gp.tileSize);
+			shootleft2 = setup("/player/LarceyShootLeft2", gp.tileSize * 2, gp.tileSize);
+			shootleft3 = setup("/player/LarceyShootLeft3", gp.tileSize * 2, gp.tileSize);
+			shootleft4 = setup("/player/LarceyShootLeft4", gp.tileSize * 2, gp.tileSize);
+			shootleft5 = setup("/player/LarceyShootLeft5", gp.tileSize * 2, gp.tileSize);
+			//right
+			shootright1 = setup("/player/LarceyShootRight1", gp.tileSize * 2, gp.tileSize);
+			shootright2 = setup("/player/LarceyShootRight2", gp.tileSize * 2, gp.tileSize);
+			shootright3 = setup("/player/LarceyShootRight3", gp.tileSize * 2, gp.tileSize);
+			shootright4 = setup("/player/LarceyShootRight4", gp.tileSize * 2, gp.tileSize);
+			shootright5 = setup("/player/LarceyShootRight5", gp.tileSize * 2, gp.tileSize);
+			//up
+			shootup1 = setup("/player/LarceyShootUp1", gp.tileSize , gp.tileSize * 2);
+			shootup2 = setup("/player/LarceyShootUp2", gp.tileSize , gp.tileSize * 2);
+			shootup3 = setup("/player/LarceyShootUp3", gp.tileSize , gp.tileSize * 2);
+			shootup4 = setup("/player/LarceyShootUp4", gp.tileSize , gp.tileSize * 2);
+			shootup5 = setup("/player/LarceyShootUp5", gp.tileSize , gp.tileSize * 2);
+		}
+	}
+	
 	public void update() {
-		if(attacking == true) {
+		if(attacking == true || shooting == true) {
 			attacking();
 		}else {
 		//check if up is pressed to move player sprite
@@ -229,6 +261,7 @@ public class Player extends Entity{
 			spriteNum = 1;
 			spriteCounter = 0;
 			attacking = false;
+			shooting = false;
 		}
 	}
 	public void checkAttack() {
@@ -305,6 +338,24 @@ public class Player extends Entity{
 					image = attackup5;
 				}
 			}
+			if(shooting == true) {
+				tempScreenY = screenY - gp.tileSize;
+				if(spriteNum ==1) {
+					image = shootup1;
+				}
+				if(spriteNum == 2) {
+					image = shootup2;
+				}
+				if(spriteNum == 3) {
+					image = shootup3;
+				}
+				if(spriteNum == 4) {
+					image = shootup4;
+				}
+				if(spriteNum == 5) {
+					image = shootup5;
+				}
+			}
 			break;
 		case "down":
 			if(attacking == false) {
@@ -339,6 +390,23 @@ public class Player extends Entity{
 				}
 				if(spriteNum == 5) {
 					image = attackdown5;
+				}
+			}
+			if(shooting == true) {
+				if(spriteNum ==1) {
+					image = shootdown1;
+				}
+				if(spriteNum == 2) {
+					image = shootdown2;
+				}
+				if(spriteNum == 3) {
+					image = shootdown3;
+				}
+				if(spriteNum == 4) {
+					image = shootdown4;
+				}
+				if(spriteNum == 5) {
+					image = shootdown5;
 				}
 			}
 			
@@ -379,6 +447,24 @@ public class Player extends Entity{
 					image = attackleft5;
 				}
 			}
+			if(shooting == true) {
+				tempScreenX = screenX - gp.tileSize;
+				if(spriteNum ==1) {
+					image = shootleft1;
+				}
+				if(spriteNum == 2) {
+					image = shootleft2;
+				}
+				if(spriteNum == 3) {
+					image = shootleft3;
+				}
+				if(spriteNum == 4) {
+					image = shootleft4;
+				}
+				if(spriteNum == 5) {
+					image = shootleft5;
+				}
+			}
 			
 			break;
 		case "right":
@@ -416,6 +502,23 @@ public class Player extends Entity{
 					image = attackright5;
 				}
 			}
+			if(shooting == true) {
+				if(spriteNum ==1) {
+					image = shootright1;
+				}
+				if(spriteNum == 2) {
+					image = shootright2;
+				}
+				if(spriteNum == 3) {
+					image = shootright3;
+				}
+				if(spriteNum == 4) {
+					image = shootright4;
+				}
+				if(spriteNum == 5) {
+					image = shootright5;
+				}
+			}
 			
 			break;
 		}
@@ -430,7 +533,7 @@ public class Player extends Entity{
 		
 	}
 	public void playerMovement() {
-		if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true ||  keyH.leftPressed == true || keyH.ePressed == true || keyH.rPressed) {
+		if(keyH.upPressed == true || keyH.downPressed == true || keyH.rightPressed == true || keyH.leftPressed == true || keyH.ePressed == true || keyH.m1Pressed) {
 			if(keyH.upPressed == true) {
 				direction = "up";
 			
@@ -473,7 +576,7 @@ public class Player extends Entity{
 		
 		
 		//if collision is false, player can move 
-		if(collisionOn == false && keyH.ePressed == false) {
+		if(collisionOn == false && keyH.ePressed == false && keyH.m1Pressed == false) {
 			
 			switch(direction) {	
 			case "up":
@@ -512,7 +615,8 @@ public class Player extends Entity{
 		}
 		
 		 HandleShooting();
-		
+		 HandleReload();
+		 
 		if(invincible) {
 			invincibleCounter++;
 			if(invincibleCounter> 60) {
@@ -523,22 +627,26 @@ public class Player extends Entity{
 		
 	}
 	public void HandleShooting() {
-		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && currentWeapon.type == type_gun) {
+		
+		if(gp.keyH.shotKeyPressed == true && projectile.alive == false && shotAvailableCounter == 30 && currentWeapon.type == type_gun && ammo > 0) {
 			//if(projectile.alive == false) {
 			// Set default coords, direction, user, alive 
-			attacking = true;
+			shooting = true;
 			projectile.set(worldX, worldY, direction, true, this);
 			
 			gp.projectileList.add(projectile);
 			shotAvailableCounter = 0;
 			ammo--;
-			if(ammo < 0) {
-				ammo = maxAmmo;
-			}
+			
 			//}
 		}
 		if(shotAvailableCounter < 30) {
 			shotAvailableCounter++;
+		}
+	}
+	public void HandleReload() {
+		if(gp.keyH.rPressed) {
+			ammo = maxAmmo;
 		}
 	}
 	
@@ -566,7 +674,7 @@ public class Player extends Entity{
 	}
 	public void interactNPC(int i) {
 		
-		if(keyH.rPressed) {
+		if(keyH.m1Pressed) {
 			attacking = true;
 		}
 		
@@ -695,10 +803,12 @@ public class Player extends Entity{
 					
 					currentWeapon = selectedItem;
 					getPlayerAttackImage();
+					getPlayerShootImage();
 					setAttack();
 				}else {
 					currentWeapon = Punch;
 					getPlayerAttackImage();
+					getPlayerShootImage();
 					setAttack();
 				}
 				

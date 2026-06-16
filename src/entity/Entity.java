@@ -29,6 +29,11 @@ public class Entity {
 	attackleft1, attackleft2, attackleft3, attackleft4, attackleft5, 
 	attackright1, attackright2, attackright3, attackright4, attackright5;
 	
+	public BufferedImage 	shootup1, shootup2, shootup3, shootup4, shootup5, 
+	shootdown1, shootdown2, shootdown3, shootdown4, shootdown5, 
+	shootleft1, shootleft2, shootleft3, shootleft4, shootleft5, 
+	shootright1, shootright2, shootright3, shootright4, shootright5;
+	
 	public String direction = "down";
 	public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
 	public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
@@ -66,6 +71,7 @@ public class Entity {
 	public int speed;
 	public boolean attacking = false;
 	public boolean invincible = false;
+	public boolean shooting = false;
 	
 	public int weight;
 	public int height;
@@ -259,7 +265,7 @@ public class Entity {
 				dyingAnimation(g2);
 			}
 			
-			g2.drawImage(image, screenX, screenY, entityWidth, entityHeight, null);
+			g2.drawImage(image, screenX, screenY, null);
 			//reset opacity
 			changeAlpha(g2, 1f);
 		}

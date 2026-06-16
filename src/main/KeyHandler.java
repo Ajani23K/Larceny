@@ -224,6 +224,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 		}
 		
 	}
+	@Override
 	public void mousePressed(MouseEvent e) {
 		int code = e.getButton();
 		
@@ -231,6 +232,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 			m1Pressed = true;
 		}
 	}
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		int code = e.getButton();
 		
