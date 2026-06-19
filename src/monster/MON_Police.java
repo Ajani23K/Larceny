@@ -5,6 +5,8 @@ import java.util.Random;
 import entity.Entity;
 import main.GamePanel;
 import object.OBJ_Bullet;
+import object.OBJ_Dollar;
+import object.OBJ_Soda;
 
 public class MON_Police extends Entity{
 	GamePanel gp;
@@ -69,6 +71,22 @@ public class MON_Police extends Entity{
 	public void damageReaction() {
 		actionLockCounter = 0;
 		direction = getPlayerDirection();
+	}
+	public void checkDrop() {
+		//CAST DIE
+		int i = new Random().nextInt(100)+1;
+		
+		//SET THE MONSTER DROP
+		if(i < 50) {
+			dropItem(new OBJ_Dollar(gp));
+		}
+		if(i >= 50 && i < 75) {
+			dropItem(new OBJ_Soda(gp));
+		}
+		if(i >= 75 && i < 100) {
+			//drop ammo 
+		}
+		
 	}
 	
 }

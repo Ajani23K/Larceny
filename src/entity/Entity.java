@@ -91,6 +91,7 @@ public class Entity {
 	public String description = "";
 	public boolean pickable = false;
 	public int useCost;
+	public int value;
 	
 	
 	public int type; // 0 = player, 1 = npc, 2 = monster
@@ -100,19 +101,26 @@ public class Entity {
 	public final int type_gun = 3;
 	public final int type_punch = 4;
 	public final int type_consumable = 5;
+	public final int type_pickupOnly = 6;
 	public int healvalue = 1;
 	public boolean waitingforresponse = false;
 	public Entity(GamePanel gp) {
 		this.gp = gp;
 	}
-	public void use(Entity entity) {
+	public void use(Entity entity) {}
+	public void setAction() {}
+	public void damageReaction() {}
+	public void checkDrop() {}
+	public void dropItem(Entity droppedItem) {
 		
-	}
-	public void setAction() {
-		
-	}
-	public void damageReaction() {
-		
+		for(int i = 0; i < gp.obj.length; i++) {
+			if(gp.obj[i] == null) {
+				gp.obj[i] = droppedItem;
+				gp.obj[i].worldX = worldX;
+				gp.obj[i].worldY = worldY;
+				break; //break to stop the loop when it finds empty slot
+			}
+		}
 	}
 	public void speak() {
 		

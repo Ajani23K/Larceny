@@ -19,6 +19,7 @@ public class OBJ_Soda extends Entity{
 		description = "[" + name + "]\nA sweet beverage, provides healing.";
 		pickable = true;
 		type = type_consumable;
+		healvalue = 1;
 		
 	}
 	public void use(Entity entity) {

@@ -82,7 +82,7 @@ public class Player extends Entity{
 		ammo = maxAmmo;
 		maxLife = 6;
 		life = maxLife;
-		money = 0;
+		money = 4;
 		Punch = new OBJ_Punch(gp);
 		currentWeapon = Punch;
 		projectile = new OBJ_Bullet(gp);
@@ -96,10 +96,7 @@ public class Player extends Entity{
 	public void setItems() {
 		
 		inventory.add(new OBJ_Soda(gp));
-		inventory.add(new OBJ_Dollar(gp));
-		inventory.add(new OBJ_Dollar(gp));
-		inventory.add(new OBJ_Dollar(gp));
-		inventory.add(new OBJ_Dollar(gp));
+		
 			}
 	public void getPlayerImage(){
 		
@@ -653,22 +650,28 @@ public class Player extends Entity{
 	public void pickUpObject(int i) {
 		
 		if(i != 999) {
-			String text = "";
-			String objectName = gp.obj[i].name;
-			if(inventory.size() != maxInventorySize) {
-				if(gp.obj[i].pickable) {
-					if(inStore) {
-						gp.crimeHandler.addObject(gp.obj[i]);
-					}
-				inventory.add(gp.obj[i]);
+			if(gp.obj[i].type == type_pickupOnly) {
+				gp.obj[i].use(this);
 				removeObject(i);
-				text = "You picked up a " + objectName + ".";
-				}
 			}else {
-				text = "Your bag is full!";
-			}
-			if(text.length() > 0) {
-			gp.ui.showMessage(text);
+				//Inventory Items
+				String text = "";
+				String objectName = gp.obj[i].name;
+				if(inventory.size() != maxInventorySize) {
+					if(gp.obj[i].pickable) {
+						if(inStore) {
+							gp.crimeHandler.addObject(gp.obj[i]);
+						}
+					inventory.add(gp.obj[i]);
+					removeObject(i);
+					text = "You picked up a " + objectName + ".";
+					}
+				}else {
+					text = "Your bag is full!";
+				}
+				if(text.length() > 0) {
+				gp.ui.showMessage(text);
+				}
 			}
 		}
 	}
@@ -836,6 +839,7 @@ public class Player extends Entity{
 		}
 	}
 	public int checkMoney() {
+		/*
 		int money = 0;
 		for(int i = 0; i < inventory.size(); i++) {
 			Entity item = inventory.get(i);
@@ -843,9 +847,11 @@ public class Player extends Entity{
 				money++;
 			}
 		}
+		*/
 		return money;
 	}
 	public void consumeMoney(int amount) {
+		/*
 		for(int t = 0; t < inventory.size() && amount > 0; t++) {
 			Entity item = inventory.get(t);
 		
@@ -856,6 +862,8 @@ public class Player extends Entity{
 			}
 			
 		}
+		*/
+		money-=amount;
 	}
 	
 }
