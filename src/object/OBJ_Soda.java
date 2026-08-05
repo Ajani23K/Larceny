@@ -16,7 +16,7 @@ public class OBJ_Soda extends Entity{
 		this.gp = gp;
 		name = "Soda";
 		down1 = setup("/objects/SodaObject");
-		description = "[" + name + "]\nA sweet beverage, provides healing.";
+		description = "[" + name + "]\nA sweet beverage, provides\n  healing.";
 		pickable = true;
 		type = type_consumable;
 		healvalue = 1;

@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -53,7 +54,9 @@ public class Entity {
 	public boolean collision = false;
 	
 	public String dialogues[] = new String[20];
+	public ArrayList<Entity> containerItems = new ArrayList<>();
 	
+	public int containerMaxSize = 20;
 	
 	int dialogueIndex = 0;
 	public boolean alive = true;
@@ -63,6 +66,7 @@ public class Entity {
 	int hpBarCounter;
 	public int invincibleCounter;
 	public boolean talkative = false;
+	public boolean container = false;
 	public int shotAvailableCounter = 0;
 	
 	//Character Status
@@ -102,6 +106,7 @@ public class Entity {
 	public final int type_punch = 4;
 	public final int type_consumable = 5;
 	public final int type_pickupOnly = 6;
+	
 	public int healvalue = 1;
 	public boolean waitingforresponse = false;
 	public Entity(GamePanel gp) {
@@ -146,6 +151,10 @@ public class Entity {
 			break;
 		
 		}
+	}
+	public void openContainer() {
+		gp.ui.containerMax = containerMaxSize;
+		gp.ui.currentContainerItems = containerItems;
 	}
 	public void response(boolean b) {
 		

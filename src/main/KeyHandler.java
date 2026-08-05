@@ -150,6 +150,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 	public void characterState(int code) {
 		if(code == KeyEvent.VK_I) {
 			gp.gameState = gp.playState;
+			gp.player.containeropened = false;
 		}
 		if(code == KeyEvent.VK_W) {
 			if(gp.ui.slotRow != 0) {
@@ -172,7 +173,17 @@ public class KeyHandler implements KeyListener, MouseListener{
 			}
 		}
 		if(code == KeyEvent.VK_ENTER) {
+			if(gp.player.containeropened == false) {
 			gp.player.selectItem();
+			}else {
+				System.out.println("selecting item from containera");
+				gp.player.selectContainerItem();
+			}
+		}
+		if(code == KeyEvent.VK_E && gp.player.containeropened == true) {
+			gp.player.containeropened = false;
+			gp.gameState = gp.playState;
+			
 		}
 	}
 	public void dialogueState(int code) {

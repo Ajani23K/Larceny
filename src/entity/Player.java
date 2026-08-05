@@ -37,6 +37,7 @@ public class Player extends Entity{
 	public final int maxInventorySize = 20;
 	public Entity lasttalked;
 	public double weaponCooldown;
+	public boolean containeropened = false;
 	
 	public double cooldownTime = 1000000000; //1 second cooldown
 	public double startTime = 0;
@@ -97,7 +98,7 @@ public class Player extends Entity{
 		
 		inventory.add(new OBJ_Soda(gp));
 		
-			}
+	}
 	public void getPlayerImage(){
 		
 	
@@ -558,6 +559,7 @@ public class Player extends Entity{
 		interactDoor(objIndex);
 		pickUpObject(objIndex);
 		interactObject(objIndex);
+		interactContainer(objIndex);
 		
 		//check NPC collision
 		int npcIndex = gp.cChecker.checkEntity(this, gp.npc);
@@ -671,6 +673,20 @@ public class Player extends Entity{
 				}
 				if(text.length() > 0) {
 				gp.ui.showMessage(text);
+				}
+			}
+		}
+	}
+	public void interactContainer(int i) {
+		if(i != 999) {
+			if(gp.obj[i] != null) {
+				if(gp.obj[i].container == true && keyH.ePressed == true) {
+				
+					containeropened = true;
+					gp.gameState = gp.characterState;
+					gp.obj[i].openContainer();
+					
+						System.out.println("Container Interacted");
 				}
 			}
 		}
@@ -823,6 +839,18 @@ public class Player extends Entity{
 			}
 		}
 	}
+	public void selectContainerItem() {
+		int itemIndex = gp.ui.getItemIndexOnSlot();
+		
+		if(itemIndex < containerMaxSize) {
+			Entity selectedItem = gp.ui.currentContainerItems.get(itemIndex);
+			
+			if(inventory.size() < maxInventorySize) {
+				inventory.add(selectedItem);
+				gp.ui.currentContainerItems.remove(itemIndex);
+			}
+		}
+	}
 	public void selectDialogue() {
 		if(gp.ui.dslotCol == 0) {
 			
@@ -865,5 +893,6 @@ public class Player extends Entity{
 		*/
 		money-=amount;
 	}
+	
 	
 }
