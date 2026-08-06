@@ -30,11 +30,37 @@ public class OBJ_Trashcan extends Entity{
 		setItems();
 	}
 	public void setItems() {
+		//loot table for trash can 30% chance for nothing, 20% chance for abundance, 50% chance for normal
 		
-		containerItems.add(new OBJ_Soda(gp));
-		containerItems.add(new OBJ_Soda(gp));
-		containerItems.add(new OBJ_Soda(gp));
-		containerItems.add(new OBJ_Soda(gp));
+		int random = (int) (Math.random()* 100);
+		String lootType;
 		
+		if(random < 30) {
+			lootType = "none";
+		}else if(random >= 30 && random < 50) {
+			lootType = "abundance";
+		}else {
+			lootType = "normal";
+		}
+		
+		if(lootType.equals("none")) {
+			//no loot
+			random = 0;
+		}
+		else if(lootType.equals("abundance")) {
+			random = (int) (Math.random()* (10 - 3 + 1)) + 3;
+		}else {
+			random = (int) (Math.random()* (5 - 1 + 1)) + 1;
+		}
+		
+		for(int i = 0; i < random; i++) {
+			int loot = (int) (Math.random()* 2);
+			
+			if(loot == 0) {
+				containerItems.add(new OBJ_Soda(gp));
+			}else if(loot == 1) {
+				containerItems.add(new OBJ_Dollar(gp));
+			}
+		}
 	}
 }

@@ -176,7 +176,7 @@ public class KeyHandler implements KeyListener, MouseListener{
 			if(gp.player.containeropened == false) {
 			gp.player.selectItem();
 			}else {
-				System.out.println("selecting item from containera");
+				
 				gp.player.selectContainerItem();
 			}
 		}
@@ -205,7 +205,15 @@ public class KeyHandler implements KeyListener, MouseListener{
 			gp.ui.dslotCol++;
 			}	
 		}
-		
+		if(code == KeyEvent.VK_ENTER) {
+			if(gp.ui.yesOrNo == true) {
+				gp.player.selectDialogue();
+				gp.ui.yesOrNo = false;
+				
+			}else {
+				gp.gameState = gp.playState;
+			}
+		}
 	}
 
 	@Override

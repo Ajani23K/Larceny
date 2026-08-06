@@ -686,7 +686,7 @@ public class Player extends Entity{
 					gp.gameState = gp.characterState;
 					gp.obj[i].openContainer();
 					
-						System.out.println("Container Interacted");
+						//System.out.println("Container Interacted");
 				}
 			}
 		}
@@ -842,7 +842,7 @@ public class Player extends Entity{
 	public void selectContainerItem() {
 		int itemIndex = gp.ui.getItemIndexOnSlot();
 		
-		if(itemIndex < containerMaxSize) {
+		if(itemIndex < gp.ui.currentContainerItems.size()) {
 			Entity selectedItem = gp.ui.currentContainerItems.get(itemIndex);
 			
 			if(inventory.size() < maxInventorySize) {

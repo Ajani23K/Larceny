@@ -159,6 +159,9 @@ public class Entity {
 	public void response(boolean b) {
 		
 	}
+	public void setItems() {
+		
+	}
 	public void update() {
 		
 		setAction();
